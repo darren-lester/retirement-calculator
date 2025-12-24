@@ -5,6 +5,7 @@ import { useSimulation } from "../simulation/useSimulation";
 const DEFAULT_SCENARIO: Scenario = {
     portfolioValue: 1000000,
     expectedYears: 30,
+    annualWithdrawal: 25000,
     numberOfBlackSwans: 1,
 };
 
@@ -20,8 +21,9 @@ function ScenarioForm() {
         const scenario = {
             portfolioValue: formData.get("portfolioValue") as unknown as number,
             expectedYears: formData.get("expectedYears") as unknown as number,
+            annualWithdrawal: formData.get("annualWithdrawal") as unknown as number,
             numberOfBlackSwans: formData.get("numberOfBlackSwans") as unknown as number,
-        };
+        } as Scenario;
         await run(scenario);
 
         return {
@@ -40,6 +42,10 @@ function ScenarioForm() {
                 <label className="flex flex-row gap-2">
                     Expected Years
                     <input type="number" min={1} max={100} step={1} defaultValue={state.scenario.expectedYears} name="expectedYears" />
+                </label>
+                <label className="flex flex-row gap-2">
+                    Annual Withdrawal
+                    <input type="number" min={0} step={5000} defaultValue={state.scenario.annualWithdrawal} name="annualWithdrawal" />
                 </label>
                 <label className="flex flex-row gap-2">
                     Number of Black Swans
