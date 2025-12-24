@@ -1,10 +1,6 @@
 import { useActionState } from "react";
-
-type Scenario = {
-    portfolioValue: number;
-    expectedYears: number;
-    numberOfBlackSwans: number;
-};
+import type { Scenario } from "../types";
+import { useSimulation } from "../simulation/useSimulation";
 
 const DEFAULT_SCENARIO: Scenario = {
     portfolioValue: 1000000,
@@ -17,21 +13,22 @@ const INITIAL_STATE = {
 };
 
 function ScenarioForm() {
+    const [state, formAction, isPending] = useActionState(runSimulation, INITIAL_STATE);
+    const { run } = useSimulation();
+
     async function runSimulation(_prevState: typeof INITIAL_STATE, formData: FormData): Promise<typeof INITIAL_STATE> {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({
-                    scenario: {
-                        portfolioValue: formData.get("portfolioValue") as unknown as number,
-                        expectedYears: formData.get("expectedYears") as unknown as number,
-                        numberOfBlackSwans: formData.get("numberOfBlackSwans") as unknown as number,
-                    },
-                });
-            }, 5000);
-        });
+        const scenario = {
+            portfolioValue: formData.get("portfolioValue") as unknown as number,
+            expectedYears: formData.get("expectedYears") as unknown as number,
+            numberOfBlackSwans: formData.get("numberOfBlackSwans") as unknown as number,
+        };
+        await run(scenario);
+
+        return {
+            scenario,
+        };
     }
 
-    const [state, formAction, isPending] = useActionState(runSimulation, INITIAL_STATE);
 
     return (
         <div>
