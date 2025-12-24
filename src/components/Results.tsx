@@ -32,7 +32,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                 }}
                 data={chartData}
             >
-                <XAxis dataKey="year" />
+                <XAxis dataKey="year" interval={10} />
                 <YAxis />
                 <Line dataKey="portfolioValue" stroke="#8884d8" />
                 <Tooltip />
