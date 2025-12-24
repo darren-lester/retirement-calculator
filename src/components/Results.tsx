@@ -16,7 +16,10 @@ export default function Results({ results }: { results: SimulationResult | null 
     return (
         <div>
             <h2>Results</h2>
+            <p>Success: {results.success ? "Yes" : "No"}</p>
+            <p>Survived {results.years.length - 1} years</p>
             <p>Total Black Swans: {results.totalBlackSwans}</p>
+
             <LineChart
                 width={500}
                 height={300}

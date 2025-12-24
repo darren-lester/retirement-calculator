@@ -54,7 +54,8 @@ function runSimulation(scenario: Scenario): SimulationResult {
     }
 
     return {
-        success: portfolioValue > 0 && years.length >= scenario.expectedYears,
+        scenario,
+        success: years.length >= scenario.expectedYears,
         portfolioValue,
         years,
         totalBlackSwans: years.filter(year => year.blackSwan).length,
