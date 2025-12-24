@@ -6,7 +6,7 @@ const DEFAULT_SCENARIO: Scenario = {
     portfolioValue: 1000000,
     expectedYears: 30,
     annualWithdrawal: 25000,
-    numberOfBlackSwans: 1,
+    blackSwanProbability: 0.05,
 };
 
 const INITIAL_STATE = {
@@ -22,7 +22,7 @@ function ScenarioForm() {
             portfolioValue: formData.get("portfolioValue") as unknown as number,
             expectedYears: formData.get("expectedYears") as unknown as number,
             annualWithdrawal: formData.get("annualWithdrawal") as unknown as number,
-            numberOfBlackSwans: formData.get("numberOfBlackSwans") as unknown as number,
+            blackSwanProbability: formData.get("blackSwanProbability") as unknown as number,
         } as Scenario;
         await run(scenario);
 
@@ -48,8 +48,8 @@ function ScenarioForm() {
                     <input type="number" min={0} step={5000} defaultValue={state.scenario.annualWithdrawal} name="annualWithdrawal" />
                 </label>
                 <label className="flex flex-row gap-2">
-                    Number of Black Swans
-                    <input type="number" min={0} max={10} step={1} defaultValue={state.scenario.numberOfBlackSwans} name="numberOfBlackSwans" />
+                    Black Swan Probability
+                    <input type="number" min={0} max={1} step={0.01} defaultValue={state.scenario.blackSwanProbability} name="blackSwanProbability" />
                 </label>
                 <button disabled={isPending}>
                     {isPending ? "Running..." : "Run Simulation"}
