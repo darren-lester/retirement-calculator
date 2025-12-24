@@ -19,7 +19,8 @@ self.onmessage = (event) => {
 
 };
 
-const EXPECTED_ANNUAL_RETURN = 0.05;
+const AVERAGE_ANNUAL_RETURN = 0.05;
+const ANNUAL_RETURN_STANDARD_DEVIATION = 0.10;
 const BLACK_SWAN_MIN_LOSS = 0.25;
 const BLACK_SWAN_MAX_LOSS = 0.50;
 
@@ -41,7 +42,7 @@ function runSimulation(scenario: Scenario): SimulationResult {
         if (blackSwan) {
             portfolioValue -= portfolioValue * blackSwanLoss;
         } else {
-            portfolioValue += portfolioValue * EXPECTED_ANNUAL_RETURN;
+            portfolioValue += portfolioValue * getVolatileReturn(AVERAGE_ANNUAL_RETURN, ANNUAL_RETURN_STANDARD_DEVIATION);
         }
 
         years.push({
@@ -58,4 +59,14 @@ function runSimulation(scenario: Scenario): SimulationResult {
         years,
         totalBlackSwans: years.filter(year => year.blackSwan).length,
     };
+}
+
+function getVolatileReturn(mean: number, stdDev: number): number {
+    // Box-Muller transform to get a normal distribution random number
+    let u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    const standardNormal = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+
+    return mean + (standardNormal * stdDev);
 }
