@@ -1,5 +1,5 @@
 import { useActionState } from "react";
-import type { Scenario } from "../types";
+import type { Scenario, SimulationResult } from "../types";
 import { useSimulation } from "../simulation/useSimulation";
 
 const DEFAULT_SCENARIO: Scenario = {
@@ -9,11 +9,11 @@ const DEFAULT_SCENARIO: Scenario = {
     blackSwanProbability: 0.05,
 };
 
-const INITIAL_STATE = {
-    scenario: DEFAULT_SCENARIO,
+const INITIAL_STATE: { scenario: Scenario } = {
+    scenario: DEFAULT_SCENARIO
 };
 
-function ScenarioForm() {
+function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) => void }) {
     const [state, formAction, isPending] = useActionState(runSimulation, INITIAL_STATE);
     const { run } = useSimulation();
 
@@ -24,10 +24,11 @@ function ScenarioForm() {
             annualWithdrawal: formData.get("annualWithdrawal") as unknown as number,
             blackSwanProbability: formData.get("blackSwanProbability") as unknown as number,
         } as Scenario;
-        await run(scenario);
+        const results = await run(scenario) as SimulationResult;
+        setResults(results);
 
         return {
-            scenario,
+            scenario
         };
     }
 
