@@ -9,9 +9,11 @@ function App() {
 
   return (
     <>
-      <h1>Black Swan Portfolio Stress Tester</h1>
-      <ScenarioForm setResults={setResults} />
-      <Results results={results} />
+      <div className="grid grid-cols-2 gap-4">
+        <h1 className="col-span-2">Black Swan Portfolio Stress Tester</h1>
+        <ScenarioForm setResults={setResults} />
+        <Results results={results} />
+      </div>
     </>
   );
 }
