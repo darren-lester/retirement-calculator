@@ -1,6 +1,7 @@
 import { useActionState } from "react";
 import type { Scenario, SimulationResult } from "../types";
 import { useSimulation } from "../simulation/useSimulation";
+import { InputField } from "./InputField";
 
 const DEFAULT_SCENARIO: Scenario = {
     portfolioValue: 1000000,
@@ -36,22 +37,10 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
     return (
         <div>
             <form className="flex flex-col gap-2 items-start" action={formAction}>
-                <label className="flex flex-row gap-2">
-                    Portfolio Value
-                    <input type="number" min={0} step={50000} defaultValue={state.scenario.portfolioValue} name="portfolioValue" />
-                </label>
-                <label className="flex flex-row gap-2">
-                    Expected Years
-                    <input type="number" min={1} max={100} step={1} defaultValue={state.scenario.expectedYears} name="expectedYears" />
-                </label>
-                <label className="flex flex-row gap-2">
-                    Annual Withdrawal
-                    <input type="number" min={0} step={5000} defaultValue={state.scenario.annualWithdrawal} name="annualWithdrawal" />
-                </label>
-                <label className="flex flex-row gap-2">
-                    Black Swan Probability
-                    <input type="number" min={0} max={1} step={0.01} defaultValue={state.scenario.blackSwanProbability} name="blackSwanProbability" />
-                </label>
+                <InputField label="Portfolio Value" min={0} step={50000} defaultValue={state.scenario.portfolioValue} name="portfolioValue" />
+                <InputField label="Expected Years" min={1} max={100} step={1} defaultValue={state.scenario.expectedYears} name="expectedYears" />
+                <InputField label="Annual Withdrawal" min={0} step={5000} defaultValue={state.scenario.annualWithdrawal} name="annualWithdrawal" />
+                <InputField label="Black Swan Probability" min={0} max={1} step={0.01} defaultValue={state.scenario.blackSwanProbability} name="blackSwanProbability" />
                 <button disabled={isPending}>
                     {isPending ? "Running..." : "Run Simulation"}
                 </button>
