@@ -29,7 +29,7 @@ function runSimulation(scenario: Scenario): SimulationResult {
     let portfolioValue = scenario.portfolioValue;
     const years: YearResult[] = [{ year: 0, portfolioValue, blackSwan: false, blackSwanLoss: 0 }];
 
-    for (let year = 0; year < 100; year++) {
+    for (let year = 0; year < 100 - scenario.currentAge; year++) {
         const inRetirement = year + scenario.currentAge >= scenario.retirementAge;
 
         if (inRetirement) {

@@ -8,7 +8,7 @@ export default function Results({ results }: { results: SimulationResult | null 
     }
 
     const chartData = results.years.map(year => ({
-        year: year.year,
+        age: year.year + results.scenario.currentAge,
         portfolioValue: year.portfolioValue,
         blackSwan: year.blackSwan ? 1 : 0,
     }));
@@ -32,7 +32,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                 }}
                 data={chartData}
             >
-                <XAxis dataKey="year" interval={10} />
+                <XAxis dataKey="age" interval={10} />
                 <YAxis />
                 <Line dataKey="portfolioValue" stroke="#8884d8" />
                 <Tooltip />
