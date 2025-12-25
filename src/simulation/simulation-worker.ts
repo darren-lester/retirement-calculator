@@ -3,7 +3,8 @@ import type { Scenario, SimulationResult, YearResult } from "../types";
 self.onmessage = (event) => {
     const scenario: Scenario = {
         portfolioValue: Number(event.data.portfolioValue),
-        expectedYears: Number(event.data.expectedYears),
+        currentAge: Number(event.data.currentAge),
+        retirementAge: Number(event.data.retirementAge),
         annualWithdrawal: Number(event.data.annualWithdrawal),
         blackSwanProbability: Number(event.data.blackSwanProbability),
     };
@@ -29,7 +30,11 @@ function runSimulation(scenario: Scenario): SimulationResult {
     const years: YearResult[] = [{ year: 0, portfolioValue, blackSwan: false, blackSwanLoss: 0 }];
 
     for (let year = 0; year < 100; year++) {
-        portfolioValue -= scenario.annualWithdrawal;
+        const inRetirement = year + scenario.currentAge >= scenario.retirementAge;
+
+        if (inRetirement) {
+            portfolioValue -= scenario.annualWithdrawal;
+        }
 
         if (portfolioValue < 0) {
             years.push({ year: year + 1, portfolioValue, blackSwan: false, blackSwanLoss: 0 });
@@ -42,6 +47,7 @@ function runSimulation(scenario: Scenario): SimulationResult {
         if (blackSwan) {
             portfolioValue -= portfolioValue * blackSwanLoss;
         } else {
+
             portfolioValue += portfolioValue * getVolatileReturn(AVERAGE_ANNUAL_RETURN, ANNUAL_RETURN_STANDARD_DEVIATION);
         }
 
@@ -55,8 +61,8 @@ function runSimulation(scenario: Scenario): SimulationResult {
 
     return {
         scenario,
-        success: years.length >= scenario.expectedYears,
         portfolioValue,
+        success: portfolioValue > 0,
         years,
         totalBlackSwans: years.filter(year => year.blackSwan).length,
     };

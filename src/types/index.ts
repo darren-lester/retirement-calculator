@@ -1,6 +1,7 @@
 export type Scenario = {
     portfolioValue: number;
-    expectedYears: number;
+    currentAge: number;
+    retirementAge: number;
     blackSwanProbability: number;
     annualWithdrawal: number;
 };
