@@ -1,4 +1,4 @@
-import { LineChart, XAxis, YAxis, Line, Tooltip, Legend } from "recharts";
+import { LineChart, XAxis, YAxis, Line, Tooltip, Legend, ReferenceLine } from "recharts";
 import type { SimulationResult } from "../types";
 
 export default function Results({ results }: { results: SimulationResult | null }) {
@@ -35,6 +35,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                 <XAxis dataKey="age" interval={10} />
                 <YAxis />
                 <Line dataKey="portfolioValue" stroke="#8884d8" />
+                <ReferenceLine x={results.scenario.retirementAge} stroke="#000" label="Retirement" />
                 <Tooltip />
                 <Legend />
             </LineChart>
