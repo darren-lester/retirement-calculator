@@ -6,7 +6,7 @@ export type Scenario = {
     annualWithdrawal: number;
 };
 
-export type SimulationResult = {
+export type SimulationIterationResult = {
     scenario: Scenario;
     success: boolean;
     portfolioValue: number;

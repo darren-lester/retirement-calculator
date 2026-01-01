@@ -1,7 +1,7 @@
 import { LineChart, XAxis, YAxis, Line, Tooltip, Legend, ReferenceLine } from "recharts";
-import type { SimulationResult } from "../types";
+import type { SimulationIterationResult } from "../types";
 
-export default function Results({ results }: { results: SimulationResult | null }) {
+export default function Results({ results }: { results: SimulationIterationResult | null }) {
 
     if (!results) {
         return <div>No results yet</div>;

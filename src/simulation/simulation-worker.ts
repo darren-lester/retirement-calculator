@@ -1,4 +1,4 @@
-import type { Scenario, SimulationResult, YearResult } from "../types";
+import type { Scenario, SimulationIterationResult, YearResult } from "../types";
 
 const ITERATIONS = 1000;
 
@@ -21,15 +21,15 @@ const ANNUAL_RETURN_STANDARD_DEVIATION = 0.10;
 const BLACK_SWAN_MIN_LOSS = 0.25;
 const BLACK_SWAN_MAX_LOSS = 0.50;
 
-function runSimulation(scenario: Scenario, iterations: number): SimulationResult[] {
-    const results: SimulationResult[] = [];
+function runSimulation(scenario: Scenario, iterations: number): SimulationIterationResult[] {
+    const results: SimulationIterationResult[] = [];
     for (let i = 0; i < iterations; i++) {
         results.push(runSimulationIteration(scenario));
     }
     return results;
 }
 
-function runSimulationIteration(scenario: Scenario): SimulationResult {
+function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
     let portfolioValue = scenario.portfolioValue;
     const years: YearResult[] = [{ year: 0, portfolioValue, blackSwan: false, blackSwanLoss: 0 }];
 
