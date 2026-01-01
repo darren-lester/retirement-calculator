@@ -27,8 +27,8 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
             annualWithdrawal: formData.get("annualWithdrawal") as unknown as number,
             blackSwanProbability: formData.get("blackSwanProbability") as unknown as number,
         } as Scenario;
-        const results = await run(scenario) as SimulationResult;
-        setResults(results);
+        const results = await run(scenario) as SimulationResult[];
+        setResults(results[0]);
 
         return {
             scenario

@@ -11,15 +11,9 @@ self.onmessage = (event) => {
         blackSwanProbability: Number(event.data.blackSwanProbability),
     };
 
-    let result;
-
-    for (let i = 0; i < ITERATIONS; i++) {
-        console.log(`Running simulation ${i + 1} of 1000`);
-        result = runSimulation(scenario);
-    }
+    const result = runSimulation(scenario, ITERATIONS);
 
     postMessage(result);
-
 };
 
 const AVERAGE_ANNUAL_RETURN = 0.05;
@@ -27,7 +21,15 @@ const ANNUAL_RETURN_STANDARD_DEVIATION = 0.10;
 const BLACK_SWAN_MIN_LOSS = 0.25;
 const BLACK_SWAN_MAX_LOSS = 0.50;
 
-function runSimulation(scenario: Scenario): SimulationResult {
+function runSimulation(scenario: Scenario, iterations: number): SimulationResult[] {
+    const results: SimulationResult[] = [];
+    for (let i = 0; i < iterations; i++) {
+        results.push(runSimulationIteration(scenario));
+    }
+    return results;
+}
+
+function runSimulationIteration(scenario: Scenario): SimulationResult {
     let portfolioValue = scenario.portfolioValue;
     const years: YearResult[] = [{ year: 0, portfolioValue, blackSwan: false, blackSwanLoss: 0 }];
 
