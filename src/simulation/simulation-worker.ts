@@ -1,5 +1,7 @@
 import type { Scenario, SimulationResult, YearResult } from "../types";
 
+const ITERATIONS = 1000;
+
 self.onmessage = (event) => {
     const scenario: Scenario = {
         portfolioValue: Number(event.data.portfolioValue),
@@ -11,7 +13,7 @@ self.onmessage = (event) => {
 
     let result;
 
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < ITERATIONS; i++) {
         console.log(`Running simulation ${i + 1} of 1000`);
         result = runSimulation(scenario);
     }
