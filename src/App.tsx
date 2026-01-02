@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "./App.css";
 import ScenarioForm from "./components/ScenarioForm";
-import type { SimulationIterationResult } from "./types";
+import type { SimulationResult } from "./types";
 import Results from "./components/Results";
 
 function App() {
-  const [results, setResults] = useState<SimulationIterationResult | null>(null);
+  const [results, setResults] = useState<SimulationResult | null>(null);
 
   return (
     <>
