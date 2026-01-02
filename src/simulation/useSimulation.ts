@@ -28,7 +28,6 @@ export function useSimulation() {
 
             workerRef.current.postMessage(scenario);
             workerRef.current.onmessage = (event) => {
-                console.log(JSON.stringify(event.data, null, 2));
                 resolve(event.data);
             };
         });

@@ -1,4 +1,4 @@
-import type { Scenario, SimulationIterationResult, YearResult } from "../types";
+import type { Scenario, SimulationResult, SimulationIterationResult, YearResult } from "../types";
 
 const ITERATIONS = 1000;
 
@@ -21,12 +21,31 @@ const ANNUAL_RETURN_STANDARD_DEVIATION = 0.10;
 const BLACK_SWAN_MIN_LOSS = 0.25;
 const BLACK_SWAN_MAX_LOSS = 0.50;
 
-function runSimulation(scenario: Scenario, iterations: number): SimulationIterationResult[] {
+function runSimulation(scenario: Scenario, iterations: number): SimulationResult {
     const results: SimulationIterationResult[] = [];
     for (let i = 0; i < iterations; i++) {
         results.push(runSimulationIteration(scenario));
     }
-    return results;
+
+    const paths = [];
+
+    for (let year = 0; year < 100 - scenario.currentAge - 1; year++) {
+        const yearResults = results.map(result => result.years[year].portfolioValue).sort((a, b) => a - b);
+        const percentile5 = yearResults[Math.floor(yearResults.length * 0.05)];
+        const percentile10 = yearResults[Math.floor(yearResults.length * 0.10)];
+        const percentile50 = yearResults[Math.floor(yearResults.length * 0.50)];
+        const percentile90 = yearResults[Math.floor(yearResults.length * 0.90)];
+
+        paths.push({
+            age: year + scenario.currentAge,
+            percentile5,
+            percentile10,
+            percentile50,
+            percentile90
+        });
+    }
+
+    return { scenario, paths };
 }
 
 function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
@@ -38,11 +57,6 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
 
         if (inRetirement) {
             portfolioValue -= scenario.annualWithdrawal;
-        }
-
-        if (portfolioValue < 0) {
-            years.push({ year: year + 1, portfolioValue, blackSwan: false, blackSwanLoss: 0 });
-            break;
         }
 
         const blackSwan = Math.random() < scenario.blackSwanProbability;

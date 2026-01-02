@@ -6,6 +6,17 @@ export type Scenario = {
     annualWithdrawal: number;
 };
 
+export type SimulationResult = {
+    scenario: Scenario;
+    paths: {
+        age: number;
+        percentile5: number;
+        percentile10: number;
+        percentile50: number;
+        percentile90: number;
+    }[]
+};
+
 export type SimulationIterationResult = {
     scenario: Scenario;
     success: boolean;

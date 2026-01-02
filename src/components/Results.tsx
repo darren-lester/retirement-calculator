@@ -1,24 +1,15 @@
 import { LineChart, XAxis, YAxis, Line, Tooltip, Legend, ReferenceLine } from "recharts";
-import type { SimulationIterationResult } from "../types";
+import type { SimulationResult } from "../types";
 
-export default function Results({ results }: { results: SimulationIterationResult | null }) {
+export default function Results({ results }: { results: SimulationResult | null }) {
 
     if (!results) {
         return <div>No results yet</div>;
     }
 
-    const chartData = results.years.map(year => ({
-        age: year.year + results.scenario.currentAge,
-        portfolioValue: year.portfolioValue,
-        blackSwan: year.blackSwan ? 1 : 0,
-    }));
-
     return (
         <div>
             <h2>Results</h2>
-            <p>Success: {results.success ? "Yes" : "No"}</p>
-            <p>Survived {results.years.length - 1} years</p>
-            <p>Total Black Swans: {results.totalBlackSwans}</p>
 
             <LineChart
                 width={500}
@@ -30,11 +21,14 @@ export default function Results({ results }: { results: SimulationIterationResul
                     left: 20,
                     bottom: 5,
                 }}
-                data={chartData}
+                data={results.paths}
             >
                 <XAxis dataKey="age" interval={10} />
                 <YAxis />
-                <Line dataKey="portfolioValue" stroke="#8884d8" />
+                <Line dataKey="percentile5" stroke="#82ca9d" />
+                <Line dataKey="percentile10" stroke="#ffc658" />
+                <Line dataKey="percentile50" stroke="#ff7300" />
+                <Line dataKey="percentile90" stroke="#d0ed57" />
                 <ReferenceLine x={results.scenario.retirementAge} stroke="#000" label="Retirement" />
                 <Tooltip />
                 <Legend />

@@ -1,5 +1,5 @@
 import { useActionState } from "react";
-import type { Scenario, SimulationIterationResult } from "../types";
+import type { Scenario, SimulationResult } from "../types";
 import { useSimulation } from "../simulation/useSimulation";
 import { InputField } from "./InputField";
 
@@ -15,7 +15,7 @@ const INITIAL_STATE: { scenario: Scenario } = {
     scenario: DEFAULT_SCENARIO
 };
 
-function ScenarioForm({ setResults }: { setResults: (results: SimulationIterationResult) => void }) {
+function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) => void }) {
     const [state, formAction, isPending] = useActionState(runSimulation, INITIAL_STATE);
     const { run } = useSimulation();
 
@@ -27,8 +27,8 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationIteratio
             annualWithdrawal: formData.get("annualWithdrawal") as unknown as number,
             blackSwanProbability: formData.get("blackSwanProbability") as unknown as number,
         } as Scenario;
-        const results = await run(scenario) as SimulationIterationResult[];
-        setResults(results[0]);
+        const results = await run(scenario) as SimulationResult;
+        setResults(results);
 
         return {
             scenario
