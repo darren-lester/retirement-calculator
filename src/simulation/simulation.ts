@@ -13,7 +13,7 @@ export function runSimulation(scenario: Scenario, iterations: number): Simulatio
 
     const paths = [];
 
-    for (let year = 0; year < 100 - scenario.currentAge - 1; year++) {
+    for (let year = 0; year <= scenario.lifeExpectancy - scenario.currentAge; year++) {
         const yearResults = results.map(result => result.years[year].portfolioValue).sort((a, b) => a - b);
         const percentile5 = yearResults[Math.floor(yearResults.length * 0.05)];
         const percentile10 = yearResults[Math.floor(yearResults.length * 0.10)];
@@ -36,7 +36,7 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
     let portfolioValue = scenario.portfolioValue;
     const years: YearResult[] = [{ year: 0, portfolioValue, blackSwan: false, blackSwanLoss: 0 }];
 
-    for (let year = 0; year < 100 - scenario.currentAge; year++) {
+    for (let year = 0; year < scenario.lifeExpectancy - scenario.currentAge; year++) {
         const inRetirement = year + scenario.currentAge >= scenario.retirementAge;
 
         if (inRetirement) {

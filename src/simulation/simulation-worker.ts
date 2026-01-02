@@ -8,6 +8,7 @@ self.onmessage = (event) => {
         portfolioValue: Number(event.data.portfolioValue),
         currentAge: Number(event.data.currentAge),
         retirementAge: Number(event.data.retirementAge),
+        lifeExpectancy: Number(event.data.lifeExpectancy),
         annualWithdrawal: Number(event.data.annualWithdrawal),
         blackSwanProbability: Number(event.data.blackSwanProbability),
     };
