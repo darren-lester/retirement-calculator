@@ -70,7 +70,7 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
     };
 }
 
-function getVolatileReturn(mean: number, stdDev: number): number {
+export function getVolatileReturn(mean: number, stdDev: number): number {
     // Box-Muller transform to get a normal distribution random number
     let u = 0, v = 0;
     while (u === 0) u = Math.random();
