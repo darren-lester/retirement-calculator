@@ -5,7 +5,7 @@ export function useSimulation() {
     const workerRef = useRef<Worker | null>(null);
 
     useEffect(() => {
-        workerRef.current = new Worker(new URL('./simulation-worker.ts', import.meta.url));
+        workerRef.current = new Worker(new URL('./simulation-worker.ts', import.meta.url), { type: 'module' });
 
         workerRef.current.onerror = (event) => {
             console.error(event);
