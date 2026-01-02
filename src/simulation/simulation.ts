@@ -37,9 +37,12 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
     const years: YearResult[] = [{ year: 0, portfolioValue, blackSwan: false, blackSwanLoss: 0 }];
 
     for (let year = 0; year < scenario.lifeExpectancy - scenario.currentAge; year++) {
-        const inRetirement = year + scenario.currentAge >= scenario.retirementAge;
+        const currentAge = year + scenario.currentAge;
+        const inRetirement = currentAge >= scenario.retirementAge;
 
-        if (inRetirement) {
+        if (!inRetirement) {
+            portfolioValue += scenario.monthlyContribution * 12;
+        } else {
             portfolioValue -= scenario.annualWithdrawal;
         }
 

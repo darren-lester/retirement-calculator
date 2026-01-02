@@ -5,6 +5,7 @@ export type Scenario = {
     lifeExpectancy: number;
     blackSwanProbability: number;
     annualWithdrawal: number;
+    monthlyContribution: number;
 };
 
 export type SimulationResult = {

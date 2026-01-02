@@ -11,6 +11,7 @@ self.onmessage = (event) => {
         lifeExpectancy: Number(event.data.lifeExpectancy),
         annualWithdrawal: Number(event.data.annualWithdrawal),
         blackSwanProbability: Number(event.data.blackSwanProbability),
+        monthlyContribution: Number(event.data.monthlyContribution),
     };
 
     const result = runSimulation(scenario, ITERATIONS);
