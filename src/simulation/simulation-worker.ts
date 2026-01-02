@@ -1,6 +1,6 @@
 import type { Scenario, SimulationResult, SimulationIterationResult, YearResult } from "../types";
 
-const ITERATIONS = 1000;
+const ITERATIONS = 10000;
 
 self.onmessage = (event) => {
     const scenario: Scenario = {
