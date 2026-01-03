@@ -2,6 +2,7 @@ import { useActionState } from "react";
 import type { Scenario, SimulationResult } from "../types";
 import { useSimulation } from "../simulation/useSimulation";
 import { InputField } from "./InputField";
+import { Fieldset } from "./Fieldset";
 
 const DEFAULT_SCENARIO: Scenario = {
     portfolioValue: 50000,
@@ -47,15 +48,23 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
     return (
         <div>
             <form className="flex flex-col gap-2 items-start" action={formAction}>
-                <InputField label="Portfolio Value" min={0} step={50000} defaultValue={state.scenario.portfolioValue} name="portfolioValue" />
-                <InputField label="Current Age" min={30} max={100} step={1} defaultValue={state.scenario.currentAge} name="currentAge" />
-                <InputField label="Retirement Age" min={30} max={100} step={1} defaultValue={state.scenario.retirementAge} name="retirementAge" />
-                <InputField label="Life Expectancy" min={30} max={120} step={1} defaultValue={state.scenario.lifeExpectancy} name="lifeExpectancy" />
-                <InputField label="Monthly Contribution" min={0} step={100} defaultValue={state.scenario.monthlyContribution} name="monthlyContribution" />
-                <InputField label="Annual Withdrawal" min={0} step={5000} defaultValue={state.scenario.annualWithdrawal} name="annualWithdrawal" />
-                <InputField label="Expected Annual Return (%)" min={0} max={100} step={1} defaultValue={state.scenario.expectedAnnualReturn} name="expectedAnnualReturn" />
-                <InputField label="Inflation Rate (%)" min={0} max={20} step={0.1} defaultValue={state.scenario.inflationRate} name="inflationRate" />
-                <InputField label="Black Swan Probability (%)" min={0} max={100} step={1} defaultValue={state.scenario.blackSwanProbability} name="blackSwanProbability" />
+                <Fieldset label="Timeline">
+                    <InputField label="Current Age" min={30} max={100} step={1} defaultValue={state.scenario.currentAge} name="currentAge" />
+                    <InputField label="Retirement Age" min={30} max={100} step={1} defaultValue={state.scenario.retirementAge} name="retirementAge" />
+                    <InputField label="Life Expectancy" min={30} max={120} step={1} defaultValue={state.scenario.lifeExpectancy} name="lifeExpectancy" />
+                </Fieldset>
+                <Fieldset label="Investments">
+                    <InputField label="Portfolio Value" min={0} step={50000} defaultValue={state.scenario.portfolioValue} name="portfolioValue" />
+                    <InputField label="Monthly Contribution" min={0} step={100} defaultValue={state.scenario.monthlyContribution} name="monthlyContribution" />
+                </Fieldset>
+                <Fieldset label="Market Assumptions">
+                    <InputField label="Expected Annual Return (%)" min={0} max={100} step={1} defaultValue={state.scenario.expectedAnnualReturn} name="expectedAnnualReturn" />
+                    <InputField label="Inflation Rate (%)" min={0} max={20} step={0.1} defaultValue={state.scenario.inflationRate} name="inflationRate" />
+                    <InputField label="Black Swan Probability (%)" min={0} max={100} step={1} defaultValue={state.scenario.blackSwanProbability} name="blackSwanProbability" />
+                </Fieldset>
+                <Fieldset label="Retirement Spending">
+                    <InputField label="Annual Withdrawal" min={0} step={5000} defaultValue={state.scenario.annualWithdrawal} name="annualWithdrawal" />
+                </Fieldset>
                 <button disabled={isPending}>
                     {isPending ? "Running..." : "Run Simulation"}
                 </button>
