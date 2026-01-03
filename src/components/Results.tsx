@@ -23,7 +23,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                 }}
                 data={results.paths}
             >
-                <XAxis dataKey="age" interval={10} />
+                <XAxis dataKey="age" interval={5} />
                 <YAxis />
                 <Line dataKey="percentile5" stroke="#82ca9d" />
                 <Line dataKey="percentile10" stroke="#ffc658" />
