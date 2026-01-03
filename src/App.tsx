@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <div className="grid grid-cols-2 gap-4">
-        <h1 className="col-span-2">Black Swan Portfolio Stress Tester</h1>
+        <h1 className="col-span-2">Retirement Calculator</h1>
         <ScenarioForm setResults={setResults} />
         <Results results={results} />
       </div>
