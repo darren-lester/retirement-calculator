@@ -43,7 +43,7 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
         if (!inRetirement) {
             portfolioValue += scenario.monthlyContribution * 12;
         } else {
-            portfolioValue -= scenario.annualWithdrawal;
+            portfolioValue = Math.max(portfolioValue - scenario.annualWithdrawal, 0);
         }
 
         const blackSwan = Math.random() < scenario.blackSwanProbability;
