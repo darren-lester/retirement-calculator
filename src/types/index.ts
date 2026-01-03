@@ -6,6 +6,7 @@ export type Scenario = {
     blackSwanProbability: number;
     annualWithdrawal: number;
     monthlyContribution: number;
+    expectedAnnualReturn: number;
 };
 
 export type SimulationResult = {

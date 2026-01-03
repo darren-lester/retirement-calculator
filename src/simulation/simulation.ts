@@ -1,6 +1,5 @@
 import type { Scenario, SimulationResult, SimulationIterationResult, YearResult } from "../types";
 
-const AVERAGE_ANNUAL_RETURN = 0.05;
 const ANNUAL_RETURN_STANDARD_DEVIATION = 0.10;
 const BLACK_SWAN_MIN_LOSS = 0.25;
 const BLACK_SWAN_MAX_LOSS = 0.50;
@@ -52,8 +51,7 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
         if (blackSwan) {
             portfolioValue -= portfolioValue * blackSwanLoss;
         } else {
-
-            portfolioValue += portfolioValue * getVolatileReturn(AVERAGE_ANNUAL_RETURN, ANNUAL_RETURN_STANDARD_DEVIATION);
+            portfolioValue += portfolioValue * getVolatileReturn(scenario.expectedAnnualReturn, ANNUAL_RETURN_STANDARD_DEVIATION);
         }
 
         years.push({
