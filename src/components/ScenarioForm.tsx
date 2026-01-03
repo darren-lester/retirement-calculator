@@ -9,9 +9,9 @@ const DEFAULT_SCENARIO: Scenario = {
     retirementAge: 65,
     lifeExpectancy: 90,
     annualWithdrawal: 25000,
-    blackSwanProbability: 0.05,
+    blackSwanProbability: 5,
     monthlyContribution: 0,
-    expectedAnnualReturn: 0.05,
+    expectedAnnualReturn: 5,
 };
 
 const INITIAL_STATE: { scenario: Scenario } = {
@@ -51,8 +51,8 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
                 <InputField label="Life Expectancy" min={30} max={120} step={1} defaultValue={state.scenario.lifeExpectancy} name="lifeExpectancy" />
                 <InputField label="Monthly Contribution" min={0} step={100} defaultValue={state.scenario.monthlyContribution} name="monthlyContribution" />
                 <InputField label="Annual Withdrawal" min={0} step={5000} defaultValue={state.scenario.annualWithdrawal} name="annualWithdrawal" />
-                <InputField label="Expected Annual Return" min={0} max={1} step={0.01} defaultValue={state.scenario.expectedAnnualReturn} name="expectedAnnualReturn" />
-                <InputField label="Black Swan Probability" min={0} max={1} step={0.01} defaultValue={state.scenario.blackSwanProbability} name="blackSwanProbability" />
+                <InputField label="Expected Annual Return (%)" min={0} max={100} step={1} defaultValue={state.scenario.expectedAnnualReturn} name="expectedAnnualReturn" />
+                <InputField label="Black Swan Probability (%)" min={0} max={100} step={1} defaultValue={state.scenario.blackSwanProbability} name="blackSwanProbability" />
                 <button disabled={isPending}>
                     {isPending ? "Running..." : "Run Simulation"}
                 </button>

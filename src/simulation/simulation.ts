@@ -45,13 +45,13 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
             portfolioValue = Math.max(portfolioValue - scenario.annualWithdrawal, 0);
         }
 
-        const blackSwan = Math.random() < scenario.blackSwanProbability;
+        const blackSwan = Math.random() < scenario.blackSwanProbability / 100;
         const blackSwanLoss = blackSwan ? BLACK_SWAN_MIN_LOSS + Math.random() * (BLACK_SWAN_MAX_LOSS - BLACK_SWAN_MIN_LOSS) : 0;
 
         if (blackSwan) {
             portfolioValue -= portfolioValue * blackSwanLoss;
         } else {
-            portfolioValue += portfolioValue * getVolatileReturn(scenario.expectedAnnualReturn, ANNUAL_RETURN_STANDARD_DEVIATION);
+            portfolioValue += portfolioValue * getVolatileReturn(scenario.expectedAnnualReturn / 100, ANNUAL_RETURN_STANDARD_DEVIATION);
         }
 
         years.push({
