@@ -15,10 +15,10 @@ export function runSimulation(scenario: Scenario, iterations: number): Simulatio
 
     for (let year = 0; year <= scenario.lifeExpectancy - scenario.currentAge; year++) {
         const yearResults = results.map(result => result.years[year].portfolioValue).sort((a, b) => a - b);
-        const percentile5 = yearResults[Math.floor(yearResults.length * 0.05)];
-        const percentile10 = yearResults[Math.floor(yearResults.length * 0.10)];
-        const percentile50 = yearResults[Math.floor(yearResults.length * 0.50)];
-        const percentile90 = yearResults[Math.floor(yearResults.length * 0.90)];
+        const percentile5 = getPercentile(yearResults, 5);
+        const percentile10 = getPercentile(yearResults, 10);
+        const percentile50 = getPercentile(yearResults, 50);
+        const percentile90 = getPercentile(yearResults, 90);
 
         paths.push({
             age: year + scenario.currentAge,
@@ -71,6 +71,10 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
         years,
         totalBlackSwans: years.filter(year => year.blackSwan).length,
     };
+}
+
+export function getPercentile(samples: number[], percentile: number): number {
+    return samples[Math.floor(samples.length * percentile / 100)];
 }
 
 export function getVolatileReturn(mean: number, stdDev: number): number {
