@@ -7,6 +7,7 @@ export type Scenario = {
     annualWithdrawal: number;
     monthlyContribution: number;
     expectedAnnualReturn: number;
+    inflationRate: number;
 };
 
 export type SimulationResult = {

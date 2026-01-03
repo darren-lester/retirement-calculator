@@ -12,6 +12,7 @@ const DEFAULT_SCENARIO: Scenario = {
     blackSwanProbability: 5,
     monthlyContribution: 0,
     expectedAnnualReturn: 5,
+    inflationRate: 3,
 };
 
 const INITIAL_STATE: { scenario: Scenario } = {
@@ -32,6 +33,7 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
             blackSwanProbability: formData.get("blackSwanProbability") as unknown as number,
             monthlyContribution: formData.get("monthlyContribution") as unknown as number,
             expectedAnnualReturn: formData.get("expectedAnnualReturn") as unknown as number,
+            inflationRate: formData.get("inflationRate") as unknown as number,
         } as Scenario;
         const results = await run(scenario) as SimulationResult;
         setResults(results);
@@ -52,6 +54,7 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
                 <InputField label="Monthly Contribution" min={0} step={100} defaultValue={state.scenario.monthlyContribution} name="monthlyContribution" />
                 <InputField label="Annual Withdrawal" min={0} step={5000} defaultValue={state.scenario.annualWithdrawal} name="annualWithdrawal" />
                 <InputField label="Expected Annual Return (%)" min={0} max={100} step={1} defaultValue={state.scenario.expectedAnnualReturn} name="expectedAnnualReturn" />
+                <InputField label="Inflation Rate (%)" min={0} max={20} step={0.1} defaultValue={state.scenario.inflationRate} name="inflationRate" />
                 <InputField label="Black Swan Probability (%)" min={0} max={100} step={1} defaultValue={state.scenario.blackSwanProbability} name="blackSwanProbability" />
                 <button disabled={isPending}>
                     {isPending ? "Running..." : "Run Simulation"}

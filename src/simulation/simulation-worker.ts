@@ -13,6 +13,7 @@ self.onmessage = (event) => {
         blackSwanProbability: Number(event.data.blackSwanProbability),
         monthlyContribution: Number(event.data.monthlyContribution),
         expectedAnnualReturn: Number(event.data.expectedAnnualReturn),
+        inflationRate: Number(event.data.inflationRate),
     };
 
     const result = runSimulation(scenario, ITERATIONS);
