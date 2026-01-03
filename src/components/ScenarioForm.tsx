@@ -4,13 +4,13 @@ import { useSimulation } from "../simulation/useSimulation";
 import { InputField } from "./InputField";
 
 const DEFAULT_SCENARIO: Scenario = {
-    portfolioValue: 1000000,
+    portfolioValue: 50000,
     currentAge: 30,
     retirementAge: 65,
     lifeExpectancy: 90,
-    annualWithdrawal: 25000,
+    annualWithdrawal: 20000,
     blackSwanProbability: 5,
-    monthlyContribution: 0,
+    monthlyContribution: 500,
     expectedAnnualReturn: 5,
     inflationRate: 3,
 };
