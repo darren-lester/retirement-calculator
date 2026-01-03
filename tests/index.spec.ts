@@ -13,7 +13,7 @@ test('runs a simulation with default values', async ({ page }) => {
 
   await page.getByRole('button', { name: 'Run Simulation' }).click();
 
-  await expect(page.getByText('No results yet')).not.toBeVisible();
+  await expect(page.getByText('No results yet')).toBeHidden();
 });
 
 test('runs a simulation with custom values', async ({ page }) => {
