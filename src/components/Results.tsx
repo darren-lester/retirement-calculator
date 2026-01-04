@@ -64,7 +64,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                     <ComposedChart
                         data={chartData}
                         margin={{
-                            top: 10,
+                            top: 20,
                             right: 10,
                             left: 5,
                             bottom: 60
