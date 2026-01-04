@@ -1,17 +1,6 @@
 import { LineChart, XAxis, YAxis, Line, Tooltip, Legend, ReferenceLine, CartesianGrid } from "recharts";
 import type { SimulationResult } from "../types";
-
-const currencyFormatter = new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 });
-
-function formatYAxisValue(value: number) {
-    if (value >= 1000000) {
-        return currencyFormatter.format(value / 1000000) + "M";
-    } else if (value >= 1000) {
-        return currencyFormatter.format(value / 1000) + "K";
-    } else {
-        return currencyFormatter.format(value);
-    }
-}
+import { abbreviateCurrency, currencyFormatter } from "../utils/currency";
 
 export default function Results({ results }: { results: SimulationResult | null }) {
     if (!results) {
@@ -28,7 +17,7 @@ export default function Results({ results }: { results: SimulationResult | null 
             >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="age" interval={5} />
-                <YAxis tickFormatter={formatYAxisValue} />
+                <YAxis tickFormatter={abbreviateCurrency} />
                 <Line dataKey="percentile5" name="5th Percentile" stroke="#82ca9d" />
                 <Line dataKey="percentile10" name="10th Percentile" stroke="#ffc658" />
                 <Line dataKey="percentile50" name="Median" stroke="#ff7300" />
