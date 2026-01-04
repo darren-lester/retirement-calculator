@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import type { Scenario } from "../types";
+import { useCallback, useEffect, useRef } from "react";
+import type { Scenario, SimulationResult } from "../types";
 
 export function useSimulation() {
     const workerRef = useRef<Worker | null>(null);
@@ -20,7 +20,7 @@ export function useSimulation() {
         };
     }, []);
 
-    async function run(scenario: Scenario) {
+    const run = useCallback(async (scenario: Scenario): Promise<SimulationResult> => {
         return new Promise((resolve) => {
             if (!workerRef.current) {
                 throw new Error('Worker not initialized');
@@ -31,7 +31,7 @@ export function useSimulation() {
                 resolve(event.data);
             };
         });
-    }
+    }, []);
 
     return { run };
 }

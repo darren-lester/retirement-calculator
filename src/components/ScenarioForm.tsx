@@ -1,4 +1,4 @@
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import type { Scenario, SimulationResult } from "../types";
 import { useSimulation } from "../simulation/useSimulation";
 import { InputField } from "./InputField";
@@ -23,6 +23,10 @@ const INITIAL_STATE: { scenario: Scenario } = {
 function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) => void }) {
     const [state, formAction, isPending] = useActionState(runSimulation, INITIAL_STATE);
     const { run } = useSimulation();
+
+    useEffect(() => {
+        run(DEFAULT_SCENARIO).then(setResults);
+    }, [run, setResults]);
 
     async function runSimulation(_prevState: typeof INITIAL_STATE, formData: FormData): Promise<typeof INITIAL_STATE> {
         const scenario = {
