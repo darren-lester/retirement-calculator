@@ -48,7 +48,7 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
                 <Fieldset label="Timeline">
                     <InputField
                         label="Current Age"
-                        min={30}
+                        min={1}
                         max={100}
                         step={1}
                         value={scenario.currentAge}
@@ -79,6 +79,7 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
                         label="Portfolio Value"
                         min={0}
                         step={10000}
+                        max={1000000}
                         value={scenario.portfolioValue}
                         name="portfolioValue"
                         onChange={(value) => updateScenario("portfolioValue", value)}
@@ -86,6 +87,7 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
                     <InputField
                         label="Monthly Contribution"
                         min={0}
+                        max={10000}
                         step={100}
                         value={scenario.monthlyContribution}
                         name="monthlyContribution"
@@ -125,7 +127,8 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
                     <InputField
                         label="Annual Withdrawal"
                         min={0}
-                        step={5000}
+                        max={100000}
+                        step={1000}
                         value={scenario.annualWithdrawal}
                         name="annualWithdrawal"
                         onChange={(value) => updateScenario("annualWithdrawal", value)}
