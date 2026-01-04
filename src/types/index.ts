@@ -14,7 +14,8 @@ export type SimulationResult = {
     scenario: Scenario;
     paths: {
         age: number;
-        percentile5: number;
+        best: number;
+        worst: number;
         percentile10: number;
         percentile50: number;
         percentile90: number;

@@ -14,14 +14,16 @@ export function runSimulation(scenario: Scenario, iterations: number): Simulatio
 
     for (let year = 0; year <= scenario.lifeExpectancy - scenario.currentAge; year++) {
         const yearResults = results.map(result => result.years[year].portfolioValue).sort((a, b) => a - b);
-        const percentile5 = getPercentile(yearResults, 5);
+        const best = yearResults[yearResults.length - 1];
+        const worst = yearResults[0];
         const percentile10 = getPercentile(yearResults, 10);
         const percentile50 = getPercentile(yearResults, 50);
         const percentile90 = getPercentile(yearResults, 90);
 
         paths.push({
             age: year + scenario.currentAge,
-            percentile5,
+            best,
+            worst,
             percentile10,
             percentile50,
             percentile90
