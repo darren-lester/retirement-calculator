@@ -9,10 +9,11 @@ function App() {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
-        <h1 className="col-span-2">Retirement Calculator</h1>
-        <ScenarioForm setResults={setResults} />
-        <Results results={results} />
+      <div className="grid grid-cols-4 gap-4">
+        <h1 className="col-span-4 text-center font-bold text-2xl">Retirement Calculator</h1>
+        <div className="col-span-1"><ScenarioForm setResults={setResults} /></div>
+        <div className="col-span-3"><Results results={results} /></div>
+
       </div>
     </>
   );

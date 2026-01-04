@@ -5,7 +5,7 @@ type FieldsetProps = {
 
 export function Fieldset({ children, label }: FieldsetProps) {
     return (
-        <fieldset className="ml-2">
+        <fieldset>
             <legend className="text-lg font-bold">{label}</legend>
             {children}
         </fieldset>

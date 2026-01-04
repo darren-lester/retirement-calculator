@@ -65,7 +65,7 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
                 <Fieldset label="Retirement Spending">
                     <InputField label="Annual Withdrawal" min={0} step={5000} defaultValue={state.scenario.annualWithdrawal} name="annualWithdrawal" />
                 </Fieldset>
-                <button disabled={isPending}>
+                <button disabled={isPending} className="bg-blue-500 text-white px-4 py-2 rounded-md w-4xs">
                     {isPending ? "Running..." : "Run Simulation"}
                 </button>
             </form>
