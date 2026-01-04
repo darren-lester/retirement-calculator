@@ -58,7 +58,7 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
                     <InputField label="Life Expectancy" min={30} max={120} step={1} defaultValue={state.scenario.lifeExpectancy} name="lifeExpectancy" />
                 </Fieldset>
                 <Fieldset label="Investments">
-                    <InputField label="Portfolio Value" min={0} step={50000} defaultValue={state.scenario.portfolioValue} name="portfolioValue" />
+                    <InputField label="Portfolio Value" min={0} step={10000} defaultValue={state.scenario.portfolioValue} name="portfolioValue" />
                     <InputField label="Monthly Contribution" min={0} step={100} defaultValue={state.scenario.monthlyContribution} name="monthlyContribution" />
                 </Fieldset>
                 <Fieldset label="Market Assumptions">
