@@ -15,6 +15,11 @@ const chartColors = {
     textSecondary: "#475569", // Slate 600
 };
 
+const ANIMATION_PROPS = {
+    animationDuration: 600,
+    animationEasing: 'ease-out' as const,
+};
+
 function ChartHeader() {
     return (
         <div className="mb-6">
@@ -111,6 +116,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                             name=""
                             legendType="none"
                             stackId="fan"
+                            {...ANIMATION_PROPS}
                         />
                         <Area
                             type="monotone"
@@ -120,6 +126,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                             fillOpacity={0.3}
                             name="10th-90th Percentile Range"
                             stackId="fan"
+                            {...ANIMATION_PROPS}
                         />
                         {/* Median as solid line */}
                         <Line
@@ -129,6 +136,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                             stroke={chartColors.median}
                             strokeWidth={2.5}
                             dot={false}
+                            {...ANIMATION_PROPS}
                         />
                         {/* Best case as faint dashed line */}
                         <Line
@@ -140,6 +148,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                             strokeDasharray="5 5"
                             dot={false}
                             opacity={0.6}
+                            {...ANIMATION_PROPS}
                         />
                         {/* Worst case as faint dashed line */}
                         <Line
@@ -151,6 +160,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                             strokeDasharray="5 5"
                             dot={false}
                             opacity={0.6}
+                            {...ANIMATION_PROPS}
                         />
                         <ReferenceLine
                             x={results.scenario.retirementAge}
