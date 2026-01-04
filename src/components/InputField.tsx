@@ -3,8 +3,9 @@ type InputFieldProps = {
     min: number;
     max?: number;
     step: number;
-    defaultValue: number;
+    value: number;
     name: string;
+    onChange: (value: number) => void;
 };
 
 export function InputField({
@@ -12,13 +13,22 @@ export function InputField({
     min,
     max,
     step,
-    defaultValue,
+    value,
     name,
+    onChange,
 }: InputFieldProps) {
     return (
         <label className="flex flex-row gap-2">
             {label}
-            <input type="number" min={min} max={max} step={step} defaultValue={defaultValue} name={name} />
+            <input
+                type="number"
+                min={min}
+                max={max}
+                step={step}
+                value={value}
+                name={name}
+                onChange={(e) => onChange(Number(e.target.value))}
+            />
         </label>
     );
 }
