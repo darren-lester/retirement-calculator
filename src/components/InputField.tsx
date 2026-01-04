@@ -22,9 +22,14 @@ export function InputField({
     };
 
     return (
-        <label className="flex flex-col gap-2">
-            <div className="flex flex-row justify-between items-center gap-2">
-                <span>{label}</span>
+        <label className="flex flex-col gap-3">
+            <div className="flex flex-row justify-between items-center gap-4">
+                <span 
+                    className="text-sm font-medium flex-1"
+                    style={{ color: 'var(--color-text-primary)' }}
+                >
+                    {label}
+                </span>
                 <input
                     type="number"
                     min={min}
@@ -33,7 +38,21 @@ export function InputField({
                     value={value}
                     name={name}
                     onChange={handleChange}
-                    className="w-24 px-2 py-1 border border-gray-300 rounded"
+                    className="w-24 px-3 py-2 text-sm text-right font-mono focus:outline-none transition-all"
+                    style={{
+                        backgroundColor: 'var(--color-surface)',
+                        border: '1px solid var(--color-border)',
+                        borderRadius: 'var(--radius-md)',
+                        color: 'var(--color-text-primary)',
+                    }}
+                    onFocus={(e) => {
+                        e.target.style.borderColor = 'var(--color-border-focus)';
+                        e.target.style.boxShadow = '0 0 0 3px var(--color-primary-light)';
+                    }}
+                    onBlur={(e) => {
+                        e.target.style.borderColor = 'var(--color-border)';
+                        e.target.style.boxShadow = 'none';
+                    }}
                 />
             </div>
             <input
@@ -43,7 +62,10 @@ export function InputField({
                 step={step}
                 value={value}
                 onChange={handleChange}
-                className="w-full"
+                className="w-full h-2 cursor-pointer"
+                style={{
+                    accentColor: 'var(--color-primary)',
+                }}
             />
         </label>
     );

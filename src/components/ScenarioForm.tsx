@@ -44,7 +44,7 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
 
     return (
         <div>
-            <div className="flex flex-col gap-2 items-start">
+            <div className="flex flex-col">
                 <Fieldset label="Timeline">
                     <InputField
                         label="Current Age"

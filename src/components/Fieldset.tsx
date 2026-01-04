@@ -5,9 +5,16 @@ type FieldsetProps = {
 
 export function Fieldset({ children, label }: FieldsetProps) {
     return (
-        <fieldset>
-            <legend className="text-lg font-bold">{label}</legend>
-            {children}
+        <fieldset className="mb-6 last:mb-0">
+            <legend 
+                className="text-base font-semibold mb-4 px-2"
+                style={{ color: 'var(--color-text-primary)' }}
+            >
+                {label}
+            </legend>
+            <div className="space-y-4">
+                {children}
+            </div>
         </fieldset>
     );
 }
