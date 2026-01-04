@@ -2,6 +2,7 @@ import { ComposedChart, XAxis, YAxis, Line, Area, Tooltip, Legend, ReferenceLine
 import type { SimulationResult } from "../types";
 import { currencyFormatter, shortCurrencyFormatter } from "../utils/currency";
 import { getYAxisMax } from "../utils/chart";
+import LoadingSpinner from "./LoadingSpinner";
 
 // Chart colors matching CSS variables for consistency
 // These match the values defined in index.css
@@ -14,20 +15,31 @@ const chartColors = {
     textSecondary: "#475569", // Slate 600
 };
 
+function ChartHeader() {
+    return (
+        <div className="mb-6">
+            <h2
+                className="text-xl font-semibold mb-2"
+                style={{ color: 'var(--color-text-primary)' }}
+            >
+                Projection Chart
+            </h2>
+            <p
+                className="text-sm"
+                style={{ color: 'var(--color-text-secondary)' }}
+            >
+                Portfolio value over time with uncertainty range
+            </p>
+        </div>
+    );
+}
+
 export default function Results({ results }: { results: SimulationResult | null }) {
     if (!results) {
         return (
-            <div
-                className="flex items-center justify-center py-16 px-4"
-                style={{
-                    minHeight: '400px',
-                    color: 'var(--color-text-secondary)'
-                }}
-            >
-                <div className="text-center">
-                    <p className="text-lg mb-2">No results yet</p>
-                    <p className="text-sm">Adjust the inputs to see your retirement projection</p>
-                </div>
+            <div className="w-full">
+                <ChartHeader />
+                <LoadingSpinner />
             </div>
         );
     }
@@ -45,20 +57,7 @@ export default function Results({ results }: { results: SimulationResult | null 
 
     return (
         <div className="w-full">
-            <div className="mb-6">
-                <h2
-                    className="text-xl font-semibold mb-2"
-                    style={{ color: 'var(--color-text-primary)' }}
-                >
-                    Projection Chart
-                </h2>
-                <p
-                    className="text-sm"
-                    style={{ color: 'var(--color-text-secondary)' }}
-                >
-                    Portfolio value over time with uncertainty range
-                </p>
-            </div>
+            <ChartHeader />
             <div className="w-full" style={{ minHeight: '300px', height: '60vh', maxHeight: '800px' }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <ComposedChart

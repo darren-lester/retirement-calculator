@@ -23,9 +23,9 @@ function App() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
           {/* Form section */}
           <aside className="lg:col-span-4 xl:col-span-3">
-            <div 
+            <div
               className="lg:sticky lg:top-6 p-4 sm:p-6"
-              style={{ 
+              style={{
                 backgroundColor: 'var(--color-surface-elevated)',
                 borderRadius: 'var(--radius-xl)',
                 boxShadow: 'var(--shadow-md)'
@@ -37,9 +37,9 @@ function App() {
 
           {/* Results section */}
           <main className="lg:col-span-8 xl:col-span-9">
-            <div 
+            <div
               className="p-4 sm:p-6"
-              style={{ 
+              style={{
                 backgroundColor: 'var(--color-surface-elevated)',
                 borderRadius: 'var(--radius-xl)',
                 boxShadow: 'var(--shadow-md)'
