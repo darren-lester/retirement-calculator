@@ -69,7 +69,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
                 </Fieldset>
                 <Fieldset label="Investments">
                     <InputField
-                        label="Portfolio Value"
+                        label="Portfolio Value (£)"
                         min={0}
                         step={10000}
                         max={1000000}
@@ -78,7 +78,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
                         onChange={(value) => updateScenario("portfolioValue", value)}
                     />
                     <InputField
-                        label="Monthly Contribution"
+                        label="Monthly Contribution (£)"
                         min={0}
                         max={10000}
                         step={100}
@@ -118,7 +118,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
                 </Fieldset>
                 <Fieldset label="Retirement Spending">
                     <InputField
-                        label="Annual Withdrawal"
+                        label="Annual Withdrawal (£)"
                         min={0}
                         max={100000}
                         step={1000}
