@@ -63,7 +63,6 @@ export default function Results({ results }: { results: SimulationResult | null 
 
     return (
         <div className="w-full">
-            <Insights results={results} />
             <ChartHeader />
             <div className="w-full" style={{ minHeight: '300px', height: '60vh', maxHeight: '800px' }}>
                 <ResponsiveContainer width="100%" height="100%">
@@ -213,6 +212,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                     </ComposedChart>
                 </ResponsiveContainer>
             </div>
+            <Insights results={results} />
         </div>
     );
 }
