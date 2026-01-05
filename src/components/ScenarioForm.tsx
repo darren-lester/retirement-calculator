@@ -98,7 +98,7 @@ function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) 
                     <InputField
                         label="Expected Annual Return (%)"
                         min={0}
-                        max={100}
+                        max={20}
                         step={1}
                         value={scenario.expectedAnnualReturn}
                         name="expectedAnnualReturn"
