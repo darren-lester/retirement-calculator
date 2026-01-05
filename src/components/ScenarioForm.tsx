@@ -1,23 +1,16 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import type { Scenario, SimulationResult } from "../types";
 import { useSimulation } from "../simulation/useSimulation";
 import { InputField } from "./InputField";
 import { Fieldset } from "./Fieldset";
 
-const DEFAULT_SCENARIO: Scenario = {
-    portfolioValue: 50000,
-    currentAge: 30,
-    retirementAge: 65,
-    lifeExpectancy: 90,
-    annualWithdrawal: 20000,
-    blackSwanProbability: 5,
-    monthlyContribution: 500,
-    expectedAnnualReturn: 5,
-    inflationRate: 3,
-};
+interface ScenarioFormProps {
+    scenario: Scenario;
+    setScenario: React.Dispatch<React.SetStateAction<Scenario>>;
+    setResults: (results: SimulationResult) => void;
+}
 
-function ScenarioForm({ setResults }: { setResults: (results: SimulationResult) => void }) {
-    const [scenario, setScenario] = useState<Scenario>(DEFAULT_SCENARIO);
+function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) {
     const { run } = useSimulation();
     const timeoutRef = useRef<number | null>(null);
 

@@ -1,10 +1,29 @@
 import { useState } from "react";
 import ScenarioForm from "./components/ScenarioForm";
-import type { SimulationResult } from "./types";
+import type { SimulationResult, Scenario } from "./types";
 import Results from "./components/Results";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+
+const DEFAULT_SCENARIO: Scenario = {
+  portfolioValue: 50000,
+  currentAge: 30,
+  retirementAge: 65,
+  lifeExpectancy: 90,
+  annualWithdrawal: 20000,
+  blackSwanProbability: 5,
+  monthlyContribution: 500,
+  expectedAnnualReturn: 5,
+  inflationRate: 3,
+};
 
 function App() {
   const [results, setResults] = useState<SimulationResult | null>(null);
+  const [scenario, setScenario] = useState<Scenario>(DEFAULT_SCENARIO);
+
+  const handleReset = () => {
+    setScenario(DEFAULT_SCENARIO);
+    setResults(null);
+  };
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--color-surface)' }}>
@@ -31,7 +50,7 @@ function App() {
                 boxShadow: 'var(--shadow-md)'
               }}
             >
-              <ScenarioForm setResults={setResults} />
+              <ScenarioForm scenario={scenario} setScenario={setScenario} setResults={setResults} />
             </div>
           </aside>
 
@@ -45,7 +64,9 @@ function App() {
                 boxShadow: 'var(--shadow-md)'
               }}
             >
-              <Results results={results} />
+              <ErrorBoundary onReset={handleReset}>
+                <Results results={results} />
+              </ErrorBoundary>
             </div>
           </main>
         </div>
