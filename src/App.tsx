@@ -49,6 +49,14 @@ function App() {
             </div>
           </main>
         </div>
+
+        <footer className="mt-12 sm:mt-16 pt-8 border-t" style={{ borderColor: 'var(--color-border)' }}>
+          <p className="text-xs sm:text-sm" style={{ color: 'var(--color-text-muted)' }}>
+            This calculator is for informational purposes only and does not constitute financial, investment, or tax advice.
+            Results are estimates based on the inputs provided and should not be relied upon as the sole basis for financial decisions.
+            Please consult with a qualified financial advisor before making any financial decisions.
+          </p>
+        </footer>
       </div>
     </div>
   );
