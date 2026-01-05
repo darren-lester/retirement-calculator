@@ -3,6 +3,7 @@ import type { SimulationResult } from "../types";
 import { currencyFormatter, shortCurrencyFormatter } from "../utils/currency";
 import { getYAxisMax } from "../utils/chart";
 import LoadingSpinner from "./LoadingSpinner";
+import Insights from "./Insights";
 
 // Chart colors matching CSS variables for consistency
 // These match the values defined in index.css
@@ -62,6 +63,7 @@ export default function Results({ results }: { results: SimulationResult | null 
 
     return (
         <div className="w-full">
+            <Insights results={results} />
             <ChartHeader />
             <div className="w-full" style={{ minHeight: '300px', height: '60vh', maxHeight: '800px' }}>
                 <ResponsiveContainer width="100%" height="100%">
