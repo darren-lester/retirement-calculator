@@ -41,7 +41,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
                 <Fieldset label="Timeline">
                     <InputField
                         label="Current Age"
-                        min={1}
+                        min={16}
                         max={100}
                         step={1}
                         value={scenario.currentAge}
@@ -59,7 +59,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
                     />
                     <InputField
                         label="Life Expectancy"
-                        min={30}
+                        min={70}
                         max={120}
                         step={1}
                         value={scenario.lifeExpectancy}
