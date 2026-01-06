@@ -39,9 +39,9 @@ function App() {
         </header>
 
         {/* Main content - responsive grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:grid-cols-[360px_1fr]">
           {/* Form section */}
-          <aside className="lg:col-span-4 xl:col-span-3">
+          <aside className="lg:col-span-4 xl:col-span-1">
             <div
               className="lg:sticky lg:top-6 p-4 sm:p-6"
               style={{
@@ -55,7 +55,7 @@ function App() {
           </aside>
 
           {/* Results section */}
-          <main className="lg:col-span-8 xl:col-span-9">
+          <main className="lg:col-span-8 xl:col-span-1">
             <div
               className="p-4 sm:p-6"
               style={{
