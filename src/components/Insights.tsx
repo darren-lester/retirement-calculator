@@ -17,7 +17,7 @@ type InsightsProps = {
 export default function Insights({ results }: InsightsProps) {
     const { scenario } = results;
 
-    const { medianMetLifeExpectancy, medianAtLifeExpectancy, medianAtRetirement, peakAge, peakValue, worstCaseRunsOutAge, worstCaseFails, tenthPercentileRunsOutAge, tenthPercentileFails, yearsInRetirement } = getInsightsData(results);
+    const { medianMetLifeExpectancy, medianAtLifeExpectancy, medianAtRetirement, peakAge, peakValue, medianRunsOutAge, worstCaseRunsOutAge, worstCaseFails, tenthPercentileRunsOutAge, tenthPercentileFails, yearsInRetirement } = getInsightsData(results);
 
     const currentInsights: Insight[] = useMemo(() => {
         const insights: Insight[] = [
@@ -27,7 +27,7 @@ export default function Insights({ results }: InsightsProps) {
                 status: medianMetLifeExpectancy ? "success" : "warning",
                 message: medianMetLifeExpectancy
                     ? `Your median scenario successfully reaches age ${scenario.lifeExpectancy} with ${currencyFormatter.format(medianAtLifeExpectancy)} remaining.`
-                    : `Your median scenario runs out of funds before reaching age ${scenario.lifeExpectancy}.`,
+                    : `Your median scenario runs out of funds at age ${medianRunsOutAge}, ${scenario.lifeExpectancy - medianRunsOutAge!} years before your life expectancy.`,
             },
             {
                 id: "portfolio-at-retirement",
@@ -79,6 +79,7 @@ export default function Insights({ results }: InsightsProps) {
         medianAtRetirement,
         peakAge,
         peakValue,
+        medianRunsOutAge,
         worstCaseFails,
         worstCaseRunsOutAge,
         tenthPercentileFails,

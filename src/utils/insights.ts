@@ -19,6 +19,8 @@ export function getInsightsData(results: SimulationResult) {
     const peakAge = peakPath.age;
     const peakValue = peakPath.percentile50;
 
+    const medianRunsOutAge = paths.find(p => p.percentile50 <= 0)?.age;
+
     // Find when worst case runs out (first age where worst <= 0)
     const worstCaseRunsOut = paths.find(p => p.worst <= 0);
     const worstCaseRunsOutAge = worstCaseRunsOut?.age;
@@ -38,6 +40,7 @@ export function getInsightsData(results: SimulationResult) {
         medianAtRetirement,
         peakAge,
         peakValue,
+        medianRunsOutAge,
         worstCaseRunsOutAge,
         worstCaseFails,
         yearsInRetirement,
