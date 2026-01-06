@@ -68,3 +68,47 @@ test('runs simulation with default parameters and renders results', async ({ pag
   // Check disclaimer is rendered
   await expect(page.getByText('This calculator is for informational purposes only and does not constitute financial, investment, or tax advice.')).toBeVisible();
 });
+
+test('updates results when parameters are changed', async ({ page }) => {
+  await page.goto('http://localhost:5173');
+
+  const initialMedianPath = page.locator('path[name="Median (50th Percentile)"]');
+  await expect(initialMedianPath).toBeVisible();
+  const initialMedianPathD = await initialMedianPath.getAttribute('d');
+
+  const initialRetirementAge = 65;
+  const initialMonthlyContribution = 500;
+  const initialExpectedReturn = 5;
+  const initialPortfolioValue = 50000;
+
+  await expect(page.getByLabel('Retirement Age')).toHaveValue(String(initialRetirementAge));
+  await expect(page.getByLabel('Monthly Contribution (£)')).toHaveValue(String(initialMonthlyContribution));
+  await expect(page.getByLabel('Expected Annual Return (%)')).toHaveValue(String(initialExpectedReturn));
+  await expect(page.getByLabel('Portfolio Value (£)')).toHaveValue(String(initialPortfolioValue));
+
+  // Verify initial insight shows correct retirement age
+  const initialInsightParagraph = page.getByText('Portfolio at Retirement').locator('..').locator('p');
+  await expect(initialInsightParagraph).toHaveText(new RegExp(`At age ${initialRetirementAge}`));
+
+  // Change parameters to new values
+  const newRetirementAge = 60;
+  const newMonthlyContribution = 1000;
+  const newExpectedReturn = 7;
+  const newPortfolioValue = 100000;
+
+  await page.getByLabel('Retirement Age').fill(String(newRetirementAge));
+  await page.getByLabel('Monthly Contribution (£)').fill(String(newMonthlyContribution));
+  await page.getByLabel('Expected Annual Return (%)').fill(String(newExpectedReturn));
+  await page.getByLabel('Portfolio Value (£)').fill(String(newPortfolioValue));
+
+  // Check median path has changed
+  const updatedMedianPath = page.locator('path[name="Median (50th Percentile)"]');
+  await expect(updatedMedianPath).toBeVisible();
+  const updatedMedianPathD = await updatedMedianPath.getAttribute('d');
+  // eslint-disable-next-line playwright/prefer-web-first-assertions
+  expect(updatedMedianPathD).not.toEqual(initialMedianPathD);
+
+  // Check insight paragraph has updated
+  const updatedInsightParagraph = page.getByText('Portfolio at Retirement').locator('..').locator('p');
+  await expect(updatedInsightParagraph).toHaveText(new RegExp(`At age ${newRetirementAge}`));
+});
