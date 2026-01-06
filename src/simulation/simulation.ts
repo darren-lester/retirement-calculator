@@ -35,7 +35,7 @@ export function runSimulation(scenario: Scenario, iterations: number): Simulatio
 
 function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
     let portfolioValue = scenario.portfolioValue;
-    const years: YearResult[] = [{ year: 0, portfolioValue, blackSwan: false, blackSwanLoss: 0 }];
+    const years: YearResult[] = [{ year: 0, portfolioValue }];
 
     for (let year = 0; year < scenario.lifeExpectancy - scenario.currentAge; year++) {
         const currentAge = year + scenario.currentAge;
@@ -61,8 +61,6 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
         years.push({
             year: year + 1,
             portfolioValue,
-            blackSwan,
-            blackSwanLoss
         });
     }
 
@@ -71,7 +69,6 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
         portfolioValue,
         success: portfolioValue > 0,
         years,
-        totalBlackSwans: years.filter(year => year.blackSwan).length,
     };
 }
 

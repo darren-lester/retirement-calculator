@@ -27,12 +27,9 @@ export type SimulationIterationResult = {
     success: boolean;
     portfolioValue: number;
     years: YearResult[];
-    totalBlackSwans: number;
 };
 
 export type YearResult = {
     year: number;
     portfolioValue: number;
-    blackSwan: boolean;
-    blackSwanLoss: number;
 };
