@@ -1,9 +1,10 @@
 import { ComposedChart, XAxis, YAxis, Line, Area, Tooltip, Legend, ReferenceLine, CartesianGrid, ResponsiveContainer } from "recharts";
 import type { SimulationResult } from "../types";
-import { currencyFormatter, shortCurrencyFormatter } from "../utils/currency";
+import { shortCurrencyFormatter } from "../utils/currency";
 import { getYAxisMax } from "../utils/chart";
 import LoadingSpinner from "./LoadingSpinner";
 import Insights from "./Insights";
+import ChartTooltip from "./ChartTooltip";
 
 // Chart colors matching CSS variables for consistency
 // These match the values defined in index.css
@@ -177,25 +178,14 @@ export default function Results({ results }: { results: SimulationResult | null 
                             }}
                         />
                         <Tooltip
-                            contentStyle={{
-                                backgroundColor: 'var(--color-surface-elevated)',
-                                border: '1px solid var(--color-border)',
-                                borderRadius: 'var(--radius-md)',
-                                color: 'var(--color-text-primary)',
-                                boxShadow: 'var(--shadow-lg)',
-                            }}
-                            itemStyle={{
-                                color: 'var(--color-text-primary)',
-                            }}
-                            labelStyle={{
-                                color: 'var(--color-text-primary)',
-                                fontWeight: 600,
-                            }}
-                            itemSorter={({ dataKey }) => {
-                                const order = ["percentile50", "percentile90", "best", "worst"];
-                                return order.indexOf(dataKey as string);
-                            }}
-                            formatter={(value) => currencyFormatter.format(value as number)}
+                            content={(props) => (
+                                <ChartTooltip
+                                    active={props.active}
+                                    label={props.label}
+                                    payload={props.payload}
+                                    retirementAge={results.scenario.retirementAge}
+                                />
+                            )}
                         />
                         <Legend
                             verticalAlign="bottom"
