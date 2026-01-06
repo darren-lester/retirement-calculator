@@ -35,10 +35,10 @@ test('runs simulation with default parameters and renders results', async ({ pag
   await expect(page.getByRole('application')).toBeVisible();
 
   // Chart lines
-  await expect(page.locator('path[name="Best Case"]').first()).toBeVisible();
-  await expect(page.locator('path[name="Worst Case"]').first()).toBeVisible();
-  await expect(page.locator('path[name="10th-90th Percentile Range"]').first()).toBeVisible();
-  await expect(page.locator('path[name="Median (50th Percentile)"]').first()).toBeVisible();
+  await expect(page.locator('path[name="Best Case"]')).toBeVisible();
+  await expect(page.locator('path[name="Worst Case"]')).toBeVisible();
+  await expect(page.locator('path[name="10th-90th Percentile Range"]')).toBeVisible();
+  await expect(page.locator('path[name="Median (50th Percentile)"]')).toBeVisible();
 
   // Chart legend
   await expect(page.locator('.recharts-default-legend')).toBeVisible();
