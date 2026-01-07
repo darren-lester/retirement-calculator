@@ -1,9 +1,9 @@
 import type { SimulationResult } from "../types";
 
-export function getYAxisMax(results: SimulationResult) {
+export function getYAxisMax(paths: SimulationResult["paths"]) {
     // Calculate Y-axis domain: use max of percentile90 values, add 10% padding
     // This ensures the chart doesn't extend to the best case peak
-    const maxPercentile90 = Math.max(...results.paths.map(p => p.percentile90));
+    const maxPercentile90 = Math.max(...paths.map(p => p.percentile90));
     const paddedMax = maxPercentile90 * 1.1;
 
     // Round up to a nice round number for uniform tick intervals

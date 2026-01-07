@@ -60,7 +60,7 @@ export default function Results({ results }: { results: SimulationResult | null 
         fanRange: path.percentile90 - path.percentile10,
     }));
 
-    const yAxisMax = getYAxisMax(results);
+    const yAxisMax = getYAxisMax(results.paths);
 
     return (
         <div className="w-full">
