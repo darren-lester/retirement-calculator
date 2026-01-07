@@ -33,7 +33,7 @@ export function runSimulation(scenario: Scenario, iterations: number): Simulatio
     return { scenario, paths };
 }
 
-function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
+export function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
     let portfolioValue = scenario.portfolioValue;
     const years: YearResult[] = [{ year: 0, portfolioValue }];
 
