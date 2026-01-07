@@ -13,16 +13,24 @@ interface ScenarioFormProps {
 function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) {
     const { run } = useSimulation();
     const timeoutRef = useRef<number | null>(null);
+    const isFirstRunRef = useRef(true);
 
     useEffect(() => {
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
         }
 
-        timeoutRef.current = window.setTimeout(async () => {
+        const executeSimulation = async () => {
             const results = await run(scenario);
             setResults(results);
-        }, 300);
+        };
+
+        if (isFirstRunRef.current) {
+            isFirstRunRef.current = false;
+            executeSimulation();
+        } else {
+            timeoutRef.current = window.setTimeout(executeSimulation, 300);
+        }
 
         return () => {
             if (timeoutRef.current) {
