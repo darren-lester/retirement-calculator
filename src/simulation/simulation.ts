@@ -72,8 +72,8 @@ function runSimulationIteration(scenario: Scenario): SimulationIterationResult {
     };
 }
 
-export function getPercentile(samples: number[], percentile: number): number {
-    return samples[Math.floor(samples.length * percentile / 100)];
+export function getPercentile(sortedSamples: number[], percentile: number): number {
+    return sortedSamples[Math.floor((sortedSamples.length - 1) * percentile / 100)];
 }
 
 export function getVolatileReturn(mean: number, stdDev: number): number {

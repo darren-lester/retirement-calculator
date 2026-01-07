@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getVolatileReturn } from "./simulation";
+import { getPercentile, getVolatileReturn } from "./simulation";
 
 // Helper function to generate many samples
 function generateSamples(mean: number, stdDev: number, count: number): number[] {
@@ -21,6 +21,41 @@ function sampleStdDev(samples: number[], mean: number): number {
     const variance = squaredDiffs.reduce((sum, val) => sum + val, 0) / samples.length;
     return Math.sqrt(variance);
 }
+
+describe("getPercentile", () => {
+    it("returns the median for 50th percentile", () => {
+        const samples = [10, 20, 30, 40, 50];
+        expect(getPercentile(samples, 50)).toBe(30);
+    });
+
+    it("returns the first element for 0th percentile", () => {
+        const samples = [10, 20, 30, 40, 50];
+        expect(getPercentile(samples, 0)).toBe(10);
+    });
+
+    it("returns the last element for 100th percentile", () => {
+        const samples = [10, 20, 30, 40, 50];
+        expect(getPercentile(samples, 100)).toBe(50);
+    });
+
+    it("returns correct value for 10th percentile", () => {
+        const samples = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+        expect(getPercentile(samples, 10)).toBe(10);
+    });
+
+    it("returns correct value for 90th percentile", () => {
+        const samples = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+        expect(getPercentile(samples, 90)).toBe(90);
+    });
+
+    it("handles single element array", () => {
+        const samples = [42];
+        expect(getPercentile(samples, 0)).toBe(42);
+        expect(getPercentile(samples, 50)).toBe(42);
+        expect(getPercentile(samples, 100)).toBe(42);
+    });
+});
+
 
 describe("getVolatileReturn", () => {
     describe("basic functionality", () => {
