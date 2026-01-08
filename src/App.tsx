@@ -11,8 +11,8 @@ const DEFAULT_SCENARIO: Scenario = {
   lifeExpectancy: 90,
   annualWithdrawal: 20000,
   blackSwanProbability: 5,
-  monthlyContribution: 500,
-  expectedAnnualReturn: 5,
+  monthlyContribution: 250,
+  expectedAnnualReturn: 8,
   inflationRate: 3,
 };
 

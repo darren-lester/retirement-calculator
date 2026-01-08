@@ -11,8 +11,8 @@ test('runs simulation with default parameters and renders results', async ({ pag
     retirementAge: 65,
     lifeExpectancy: 90,
     portfolioValue: 50000,
-    monthlyContribution: 500,
-    expectedAnnualReturn: 5,
+    monthlyContribution: 250,
+    expectedAnnualReturn: 8,
     inflationRate: 3,
     blackSwanProbability: 5,
     annualWithdrawal: 20000,
@@ -77,8 +77,8 @@ test('updates results when parameters are changed', async ({ page }) => {
   const initialMedianPathD = await initialMedianPath.getAttribute('d');
 
   const initialRetirementAge = 65;
-  const initialMonthlyContribution = 500;
-  const initialExpectedReturn = 5;
+  const initialMonthlyContribution = 250;
+  const initialExpectedReturn = 8;
   const initialPortfolioValue = 50000;
 
   await expect(page.getByLabel('Retirement Age')).toHaveValue(String(initialRetirementAge));
