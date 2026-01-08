@@ -6,6 +6,7 @@ type ErrorBoundaryProps = {
     children: ReactNode;
     onReset: () => void;
     scenario: Scenario;
+    onError?: () => void;
 }
 
 type ErrorBoundaryState = {
@@ -41,6 +42,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {
         console.error("ErrorBoundary caught an error:", error, errorInfo);
+        this.props.onError?.();
     }
 
     handleReset = () => {

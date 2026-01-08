@@ -25,6 +25,11 @@ function App() {
     setResults(null);
   };
 
+  const handleError = () => {
+    // reset results on error so the loading spinner shows on next simulation run
+    setResults(null);
+  };
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--color-surface)' }}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
@@ -64,7 +69,7 @@ function App() {
                 boxShadow: 'var(--shadow-md)'
               }}
             >
-              <ErrorBoundary onReset={handleReset} scenario={scenario}>
+              <ErrorBoundary onReset={handleReset} scenario={scenario} onError={handleError}>
                 <Results results={results} />
               </ErrorBoundary>
             </div>
