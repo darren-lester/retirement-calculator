@@ -102,11 +102,7 @@ test('updates results when parameters are changed', async ({ page }) => {
   await page.getByLabel('Portfolio Value (£)').fill(String(newPortfolioValue));
 
   // Check median path has changed
-  const updatedMedianPath = page.locator('path[name="Median (50th Percentile)"]');
-  await expect(updatedMedianPath).toBeVisible();
-  const updatedMedianPathD = await updatedMedianPath.getAttribute('d');
-  // eslint-disable-next-line playwright/prefer-web-first-assertions
-  expect(updatedMedianPathD).not.toEqual(initialMedianPathD);
+  await expect(page.locator('path[name="Median (50th Percentile)"]')).not.toHaveAttribute('d', initialMedianPathD!);
 
   // Check insight paragraph has updated
   const updatedInsightParagraph = page.getByText('Portfolio at Retirement').locator('..').locator('p');
