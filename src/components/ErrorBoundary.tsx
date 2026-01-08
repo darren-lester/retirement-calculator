@@ -1,9 +1,11 @@
 import { Component } from "react";
 import type { ErrorInfo, ReactNode } from "react";
+import type { Scenario } from "../types";
 
 type ErrorBoundaryProps = {
     children: ReactNode;
     onReset: () => void;
+    scenario: Scenario;
 }
 
 type ErrorBoundaryState = {
@@ -25,6 +27,16 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             hasError: true,
             error,
         };
+    }
+
+    componentDidUpdate(prevProps: ErrorBoundaryProps) {
+        // Reset error state when scenario changes
+        if (this.state.hasError && prevProps.scenario !== this.props.scenario) {
+            this.setState({
+                hasError: false,
+                error: null,
+            });
+        }
     }
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {

@@ -64,7 +64,7 @@ function App() {
                 boxShadow: 'var(--shadow-md)'
               }}
             >
-              <ErrorBoundary onReset={handleReset}>
+              <ErrorBoundary onReset={handleReset} scenario={scenario}>
                 <Results results={results} />
               </ErrorBoundary>
             </div>
