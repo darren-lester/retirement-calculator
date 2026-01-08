@@ -79,7 +79,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
                     <InputField
                         label="Portfolio Value (£)"
                         min={0}
-                        step={10000}
+                        step={1000}
                         max={1000000}
                         value={scenario.portfolioValue}
                         name="portfolioValue"
@@ -89,7 +89,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
                         label="Monthly Contribution (£)"
                         min={0}
                         max={10000}
-                        step={100}
+                        step={25}
                         value={scenario.monthlyContribution}
                         name="monthlyContribution"
                         onChange={(value) => updateScenario("monthlyContribution", value)}
@@ -129,7 +129,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
                         label="Annual Withdrawal (£)"
                         min={0}
                         max={100000}
-                        step={1000}
+                        step={500}
                         value={scenario.annualWithdrawal}
                         name="annualWithdrawal"
                         onChange={(value) => updateScenario("annualWithdrawal", value)}
