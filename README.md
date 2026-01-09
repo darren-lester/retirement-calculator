@@ -6,7 +6,7 @@ A performance-optimised retirement planning tool with Monte Carlo simulations fo
 
 **[View live application](https://dlester-retirement-calculator.vercel.app/)**
 
-![Application Screenshot](./docs/retirement-calculator-screenshot.png)
+![Application demo video](./docs/retirement-calculator.gif)
 *Monte Carlo simulation results showing probability distribution of retirement outcomes*
 
 ## ✨ Key Features
