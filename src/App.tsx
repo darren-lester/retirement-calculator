@@ -31,14 +31,14 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-surface)' }}>
+    <div className="min-h-screen">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
         {/* Header */}
         <header className="mb-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 text-slate-900">
             Retirement Calculator
           </h1>
-          <p className="text-base sm:text-lg" style={{ color: 'var(--color-text-secondary)' }}>
+          <p className="text-base sm:text-lg text-slate-600">
             Plan your financial future with confidence
           </p>
         </header>
@@ -48,12 +48,7 @@ function App() {
           {/* Form section */}
           <aside className="lg:col-span-4 xl:col-span-1">
             <div
-              className="lg:sticky lg:top-6 p-4 sm:p-6"
-              style={{
-                backgroundColor: 'var(--color-surface-elevated)',
-                borderRadius: 'var(--radius-xl)',
-                boxShadow: 'var(--shadow-md)'
-              }}
+              className="lg:sticky lg:top-6 p-4 sm:p-6 bg-white rounded-xl shadow-md"
             >
               <ScenarioForm scenario={scenario} setScenario={setScenario} setResults={setResults} />
             </div>
@@ -62,12 +57,7 @@ function App() {
           {/* Results section */}
           <main className="lg:col-span-8 xl:col-span-1">
             <div
-              className="p-4 sm:p-6"
-              style={{
-                backgroundColor: 'var(--color-surface-elevated)',
-                borderRadius: 'var(--radius-xl)',
-                boxShadow: 'var(--shadow-md)'
-              }}
+              className="p-4 sm:p-6 bg-white rounded-xl shadow-md"
             >
               <ErrorBoundary onReset={handleReset} scenario={scenario} onError={handleError}>
                 <Results results={results} />
@@ -76,8 +66,8 @@ function App() {
           </main>
         </div>
 
-        <footer className="mt-12 sm:mt-16 pt-8 border-t" style={{ borderColor: 'var(--color-border)' }}>
-          <p className="text-xs sm:text-sm" style={{ color: 'var(--color-text-muted)' }}>
+        <footer className="mt-12 sm:mt-16 pt-8 border-t border-slate-200">
+          <p className="text-xs sm:text-sm text-slate-500">
             This calculator is for informational purposes only and does not constitute financial, investment, or tax advice.
             Results are estimates based on the inputs provided and should not be relied upon as the sole basis for financial decisions.
             Please consult with a qualified financial advisor before making any financial decisions.

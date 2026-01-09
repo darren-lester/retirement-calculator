@@ -60,8 +60,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                     <div className="max-w-md w-full text-center">
                         <div className="mb-6">
                             <svg
-                                className="mx-auto h-16 w-16"
-                                style={{ color: 'var(--color-error, #ef4444)' }}
+                                className="mx-auto h-16 w-16 text-red-500"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -76,20 +75,18 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                             </svg>
                         </div>
                         <h2
-                            className="text-2xl font-semibold mb-3"
-                            style={{ color: 'var(--color-text-primary)' }}
+                            className="text-2xl font-semibold mb-3 text-slate-900"
                         >
                             Something went wrong
                         </h2>
                         <p
-                            className="text-base mb-6"
-                            style={{ color: 'var(--color-text-secondary)' }}
+                            className="text-base mb-6 text-slate-600"
                         >
                             An error occurred while displaying the simulation results. You can reset to the default scenario to continue.
                         </p>
                         <button
                             onClick={this.handleReset}
-                            className="px-6 py-3 rounded-lg font-medium transition-colors bg-[var(--color-primary,#2563eb)] hover:bg-[var(--color-primary-hover,#1d4ed8)] text-white"
+                            className="px-6 py-3 rounded-lg font-medium transition-colors bg-blue-600 hover:bg-blue-700 text-white"
                         >
                             Reset to Default Scenario
                         </button>

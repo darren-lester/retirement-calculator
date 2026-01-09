@@ -90,51 +90,36 @@ export default function Insights({ results }: InsightsProps) {
     return (
         <div className="mb-8">
             <h2
-                className="text-xl font-semibold mb-4"
-                style={{ color: 'var(--color-text-primary)' }}
+                className="text-xl font-semibold mb-4 text-slate-900"
             >
                 Plan Insights
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {currentInsights.map((insight) => {
-                    const statusColors: Record<'success' | 'warning' | 'info', { bg: string; border: string; text: string }> = {
-                        success: {
-                            bg: 'rgba(34, 197, 94, 0.1)',
-                            border: 'rgba(34, 197, 94, 0.3)',
-                            text: 'rgb(22, 163, 74)',
-                        },
-                        warning: {
-                            bg: 'rgba(234, 88, 12, 0.1)',
-                            border: 'rgba(234, 88, 12, 0.3)',
-                            text: 'rgb(194, 65, 12)',
-                        },
-                        info: {
-                            bg: 'rgba(37, 99, 235, 0.1)',
-                            border: 'rgba(37, 99, 235, 0.3)',
-                            text: 'rgb(29, 78, 216)',
-                        },
+                    const statusClasses: Record<'success' | 'warning' | 'info', string> = {
+                        success: 'bg-green-500/10 border-l-green-500/30',
+                        warning: 'bg-orange-600/10 border-l-orange-600/30',
+                        info: 'bg-blue-600/10 border-l-blue-600/30',
                     };
 
-                    const colors = statusColors[insight.status];
+                    const textClasses: Record<'success' | 'warning' | 'info', string> = {
+                        success: 'text-green-700',
+                        warning: 'text-orange-700',
+                        info: 'text-blue-700',
+                    };
 
                     return (
                         <div
                             key={insight.id}
-                            className="p-4 rounded-lg border-l-4 insight-card-enter"
-                            style={{
-                                backgroundColor: colors.bg,
-                                borderLeftColor: colors.border,
-                            }}
+                            className={`p-4 rounded-lg border-l-4 insight-card-enter ${statusClasses[insight.status]}`}
                         >
                             <h3
-                                className="font-semibold mb-1"
-                                style={{ color: colors.text }}
+                                className={`font-semibold mb-1 ${textClasses[insight.status]}`}
                             >
                                 {insight.title}
                             </h3>
                             <p
-                                className="text-sm"
-                                style={{ color: 'var(--color-text-secondary)' }}
+                                className="text-sm text-slate-600"
                             >
                                 {insight.message}
                             </p>

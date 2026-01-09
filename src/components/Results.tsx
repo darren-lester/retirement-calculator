@@ -26,14 +26,12 @@ function ChartHeader() {
     return (
         <div className="mb-6">
             <h2
-                className="text-xl font-semibold mb-2"
-                style={{ color: 'var(--color-text-primary)' }}
+                className="text-xl font-semibold mb-2 text-slate-900"
             >
                 Projection Chart
             </h2>
             <p
-                className="text-sm"
-                style={{ color: 'var(--color-text-secondary)' }}
+                className="text-sm text-slate-600"
             >
                 Portfolio value over time with uncertainty range
             </p>
@@ -65,7 +63,7 @@ export default function Results({ results }: { results: SimulationResult | null 
     return (
         <div className="w-full">
             <ChartHeader />
-            <div className="w-full" style={{ minHeight: '300px', height: '60vh', maxHeight: '800px' }}>
+            <div className="w-full min-h-[300px] h-[60vh] max-h-[800px]">
                 <ResponsiveContainer width="100%" height="100%">
                     <ComposedChart
                         data={chartData}
@@ -191,7 +189,7 @@ export default function Results({ results }: { results: SimulationResult | null 
                             verticalAlign="bottom"
                             wrapperStyle={{
                                 paddingTop: '20px',
-                                color: 'var(--color-text-primary)',
+                                color: 'var(--color-text-primary)'
                             }}
                             iconType="line"
                             itemSorter={({ dataKey }) => {

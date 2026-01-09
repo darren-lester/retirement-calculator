@@ -18,12 +18,7 @@ export default function LoadingSpinner() {
                 }
             `}</style>
             <div
-                className="flex items-center justify-center w-full"
-                style={{
-                    minHeight: '300px',
-                    height: '60vh',
-                    maxHeight: '800px',
-                }}
+                className="flex items-center justify-center w-full min-h-[300px] h-[60vh] max-h-[800px]"
             >
                 <div
                     className="loading-spinner"

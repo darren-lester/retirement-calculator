@@ -25,8 +25,7 @@ export function InputField({
         <label className="flex flex-col gap-3">
             <div className="flex flex-row justify-between items-center gap-4">
                 <span 
-                    className="text-sm font-medium flex-1"
-                    style={{ color: 'var(--color-text-primary)' }}
+                    className="text-sm font-medium flex-1 text-slate-900"
                 >
                     {label}
                 </span>
@@ -38,20 +37,14 @@ export function InputField({
                     value={value}
                     name={name}
                     onChange={handleChange}
-                    className="w-24 px-3 py-2 text-sm text-right font-mono focus:outline-none transition-all"
-                    style={{
-                        backgroundColor: 'var(--color-surface)',
-                        border: '1px solid var(--color-border)',
-                        borderRadius: 'var(--radius-md)',
-                        color: 'var(--color-text-primary)',
-                    }}
+                    className="w-24 px-3 py-2 text-sm text-right font-mono focus:outline-none transition-all bg-slate-50 border border-slate-200 rounded-md text-slate-900"
                     onFocus={(e) => {
-                        e.target.style.borderColor = 'var(--color-border-focus)';
-                        e.target.style.boxShadow = '0 0 0 3px var(--color-primary-light)';
+                        e.target.classList.add('border-blue-600', 'shadow-[0_0_0_3px_rgba(219,234,254,1)]');
+                        e.target.classList.remove('border-slate-200');
                     }}
                     onBlur={(e) => {
-                        e.target.style.borderColor = 'var(--color-border)';
-                        e.target.style.boxShadow = 'none';
+                        e.target.classList.remove('border-blue-600', 'shadow-[0_0_0_3px_rgba(219,234,254,1)]');
+                        e.target.classList.add('border-slate-200');
                     }}
                 />
             </div>
@@ -62,10 +55,7 @@ export function InputField({
                 step={step}
                 value={value}
                 onChange={handleChange}
-                className="w-full h-2 cursor-pointer"
-                style={{
-                    accentColor: 'var(--color-primary)',
-                }}
+                className="w-full h-2 cursor-pointer accent-blue-600"
             />
         </label>
     );
