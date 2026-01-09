@@ -24,7 +24,7 @@ export function InputField({
     return (
         <label className="flex flex-col gap-3">
             <div className="flex flex-row justify-between items-center gap-4">
-                <span 
+                <span
                     className="text-sm font-medium flex-1 text-slate-900"
                 >
                     {label}
@@ -37,15 +37,7 @@ export function InputField({
                     value={value}
                     name={name}
                     onChange={handleChange}
-                    className="w-24 px-3 py-2 text-sm text-right font-mono focus:outline-none transition-all bg-slate-50 border border-slate-200 rounded-md text-slate-900"
-                    onFocus={(e) => {
-                        e.target.classList.add('border-blue-600', 'shadow-[0_0_0_3px_rgba(219,234,254,1)]');
-                        e.target.classList.remove('border-slate-200');
-                    }}
-                    onBlur={(e) => {
-                        e.target.classList.remove('border-blue-600', 'shadow-[0_0_0_3px_rgba(219,234,254,1)]');
-                        e.target.classList.add('border-slate-200');
-                    }}
+                    className="w-24 px-3 py-2 text-sm text-right font-mono focus:outline-none transition-all bg-slate-50 border border-slate-200 focus:border-blue-600 focus:shadow-[0_0_0_3px_rgba(219,234,254,1)] rounded-md text-slate-900"
                 />
             </div>
             <input
