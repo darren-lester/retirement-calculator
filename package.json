@@ -12,7 +12,8 @@
     "test": "vitest",
     "test:unit": "vitest --run",
     "test:e2e": "playwright test",
-    "test:all": "npm run test:unit && npm run test:e2e"
+    "test:all": "npm run test:unit && npm run test:e2e",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
@@ -28,6 +29,7 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "@vitest/coverage-v8": "^4.0.16",
     "@vitest/web-worker": "^4.0.16",
     "eslint": "^9.39.1",
     "eslint-plugin-playwright": "^2.4.0",

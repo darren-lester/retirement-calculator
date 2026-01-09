@@ -9,5 +9,9 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     exclude: ['**/node_modules/**', '**/.git/**', 'tests/**'],
+    coverage: {
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
+      reporter: ['text', 'html'],
+    }
   }
 })
