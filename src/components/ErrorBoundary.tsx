@@ -61,7 +61,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     render() {
         if (this.state.hasError) {
             return (
-                <div className={`w-full flex flex-col items-center justify-center py-12 px-4${this.props.className}`}>
+                <div className={`w-full flex flex-col items-center justify-center py-12 px-4 ${this.props.className}`}>
                     <div className="max-w-md w-full text-center">
                         <div className="mb-6">
                             <svg
