@@ -7,6 +7,7 @@ type ErrorBoundaryProps = {
     onReset: () => void;
     scenario: Scenario;
     onError?: () => void;
+    className?: string;
 }
 
 type ErrorBoundaryState = {
@@ -22,6 +23,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             error: null,
         };
     }
+
+    static defaultProps: Partial<ErrorBoundaryProps> = {
+        className: '',
+    };
 
     static getDerivedStateFromError(error: Error): ErrorBoundaryState {
         return {
@@ -56,7 +61,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     render() {
         if (this.state.hasError) {
             return (
-                <div className="w-full flex flex-col items-center justify-center py-12 px-4">
+                <div className={`w-full flex flex-col items-center justify-center py-12 px-4${this.props.className}`}>
                     <div className="max-w-md w-full text-center">
                         <div className="mb-6">
                             <svg
