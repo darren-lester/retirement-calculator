@@ -1,19 +1,17 @@
+import type { TooltipContentProps } from "recharts";
 import { currencyFormatter } from "../utils/currency";
 
-type TooltipPayload = {
-    payload: {
-        percentile10: number;
-        percentile50: number;
-        percentile90: number;
-        best: number;
-        worst: number;
-    };
+type ChartDataPoint = {
+    age: number;
+    percentile10: number;
+    percentile50: number;
+    percentile90: number;
+    best: number;
+    worst: number;
+    fanRange?: number;
 };
 
-type ChartTooltipProps = {
-    active: boolean;
-    label?: number | string;
-    payload: readonly TooltipPayload[];
+type ChartTooltipProps = Pick<TooltipContentProps<number, string>, "active" | "label" | "payload"> & {
     retirementAge: number;
 };
 
@@ -23,17 +21,18 @@ export default function ChartTooltip({
     label,
     retirementAge,
 }: ChartTooltipProps) {
-    if (!active || payload.length === 0 || !label) {
+    if (!active || !payload || payload.length === 0 || !label) {
         return null;
     }
 
+    const dataPoint = payload[0].payload as ChartDataPoint;
     const {
         percentile10,
         percentile50,
         percentile90,
         best,
         worst,
-    } = payload[0].payload;
+    } = dataPoint;
 
     const age = Number(label);
     const isRetirementAge = age === retirementAge;

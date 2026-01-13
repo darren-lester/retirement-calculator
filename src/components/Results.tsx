@@ -15,7 +15,7 @@ const chartColors = {
     grid: "#e2e8f0", // Slate 200
     primary: "#2563eb", // Blue 600
     textSecondary: "#475569", // Slate 600
-};
+} as const;
 
 const ANIMATION_PROPS = {
     animationDuration: 600,
@@ -39,7 +39,11 @@ function ChartHeader() {
     );
 }
 
-export default function Results({ results }: { results: SimulationResult | null }) {
+type ResultsProps = {
+    results: SimulationResult | null;
+};
+
+export default function Results({ results }: ResultsProps) {
     if (!results) {
         return (
             <div className="w-full">

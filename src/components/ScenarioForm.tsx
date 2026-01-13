@@ -13,7 +13,7 @@ interface ScenarioFormProps {
 function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) {
     const { run } = useSimulation();
     const [error, setError] = useState<unknown>(null);
-    const timeoutRef = useRef<number | null>(null);
+    const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const isFirstRunRef = useRef(true);
 
     useEffect(() => {
