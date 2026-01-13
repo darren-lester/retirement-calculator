@@ -7,29 +7,30 @@ export function useSimulation() {
     useEffect(() => {
         workerRef.current = new Worker(new URL('./simulation-worker.ts', import.meta.url), { type: 'module' });
 
-        workerRef.current.onerror = (event) => {
-            console.error(event);
-        };
-
-        workerRef.current.onmessageerror = (event) => {
-            console.error(event);
-        };
-
         return () => {
             workerRef.current?.terminate();
         };
     }, []);
 
     const run = useCallback(async (scenario: Scenario): Promise<SimulationResult> => {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             if (!workerRef.current) {
                 throw new Error('Worker not initialized');
             }
 
-            workerRef.current.postMessage(scenario);
             workerRef.current.onmessage = (event) => {
                 resolve(event.data);
             };
+
+            workerRef.current.onerror = (event) => {
+                reject(new Error(event.message));
+            };
+
+            workerRef.current.onmessageerror = (event) => {
+                reject(new Error(`Error receiving message from worker: ${event}`));
+            };
+
+            workerRef.current.postMessage(scenario);
         });
     }, []);
 

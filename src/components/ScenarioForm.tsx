@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Scenario, SimulationResult } from "../types";
 import { useSimulation } from "../simulation/useSimulation";
 import { InputField } from "./InputField";
@@ -12,6 +12,7 @@ interface ScenarioFormProps {
 
 function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) {
     const { run } = useSimulation();
+    const [error, setError] = useState<unknown>(null);
     const timeoutRef = useRef<number | null>(null);
     const isFirstRunRef = useRef(true);
 
@@ -21,8 +22,12 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
         }
 
         const executeSimulation = async () => {
-            const results = await run(scenario);
-            setResults(results);
+            try {
+                const results = await run(scenario);
+                setResults(results);
+            } catch (error) {
+                setError(error);
+            }
         };
 
         if (isFirstRunRef.current) {
@@ -42,6 +47,10 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
     const updateScenario = (field: keyof Scenario, value: number) => {
         setScenario(prev => ({ ...prev, [field]: value }));
     };
+
+    if (error) {
+        throw error;
+    }
 
     return (
         <div>
