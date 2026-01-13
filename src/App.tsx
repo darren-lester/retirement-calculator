@@ -45,25 +45,27 @@ function App() {
 
         {/* Main content - responsive grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:grid-cols-[360px_1fr]">
-          {/* Form section */}
-          <aside className="lg:col-span-4 xl:col-span-1">
-            <div
-              className="lg:sticky lg:top-6 p-4 sm:p-6 bg-white rounded-xl shadow-md"
-            >
-              <ScenarioForm scenario={scenario} setScenario={setScenario} setResults={setResults} />
-            </div>
-          </aside>
+          <ErrorBoundary className="lg:col-span-12" onReset={handleReset} scenario={scenario} onError={handleError}>
+            {/* Form section */}
+            <aside className="lg:col-span-4 xl:col-span-1">
+              <div
+                className="lg:sticky lg:top-6 p-4 sm:p-6 bg-white rounded-xl shadow-md"
+              >
+                <ScenarioForm scenario={scenario} setScenario={setScenario} setResults={setResults} />
+              </div>
+            </aside>
 
-          {/* Results section */}
-          <main className="lg:col-span-8 xl:col-span-1">
-            <div
-              className="p-4 sm:p-6 bg-white rounded-xl shadow-md"
-            >
-              <ErrorBoundary onReset={handleReset} scenario={scenario} onError={handleError}>
-                <Results results={results} />
-              </ErrorBoundary>
-            </div>
-          </main>
+            {/* Results section */}
+            <main className="lg:col-span-8 xl:col-span-1">
+              <div
+                className="p-4 sm:p-6 bg-white rounded-xl shadow-md"
+              >
+                <ErrorBoundary onReset={handleReset} scenario={scenario} onError={handleError}>
+                  <Results results={results} />
+                </ErrorBoundary>
+              </div>
+            </main>
+          </ErrorBoundary>
         </div>
 
         <footer className="mt-12 sm:mt-16 pt-8 border-t border-slate-200">
