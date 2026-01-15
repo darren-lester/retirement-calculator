@@ -7,7 +7,7 @@ import { Fieldset } from "./Fieldset";
 interface ScenarioFormProps {
     scenario: Scenario;
     setScenario: React.Dispatch<React.SetStateAction<Scenario>>;
-    setResults: (results: SimulationResult) => void;
+    setResults: (results: SimulationResult | null) => void;
 }
 
 function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) {
@@ -17,6 +17,12 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
     const isFirstRunRef = useRef(true);
 
     useEffect(() => {
+
+        if (Object.values(scenario).some(value => value === null)) {
+            setResults(null);
+            return;
+        }
+
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
         }
@@ -44,7 +50,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
         };
     }, [scenario, run, setResults]);
 
-    const updateScenario = (field: keyof Scenario, value: number) => {
+    const updateScenario = (field: keyof Scenario, value: number | null) => {
         setScenario(prev => ({ ...prev, [field]: value }));
     };
 
