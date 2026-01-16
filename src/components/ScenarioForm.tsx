@@ -8,9 +8,10 @@ interface ScenarioFormProps {
     scenario: Scenario;
     setScenario: React.Dispatch<React.SetStateAction<Scenario>>;
     setResults: (results: SimulationResult | null) => void;
+    setLoading: (loading: boolean) => void;
 }
 
-function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) {
+function ScenarioForm({ scenario, setScenario, setResults, setLoading }: ScenarioFormProps) {
     const { run } = useSimulation();
     const [error, setError] = useState<unknown>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -20,6 +21,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
 
         if (Object.values(scenario).some(value => value === null)) {
             setResults(null);
+            setLoading(false);
             return;
         }
 
@@ -28,11 +30,14 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
         }
 
         const executeSimulation = async () => {
+            setLoading(true);
             try {
                 const results = await run(scenario);
                 setResults(results);
             } catch (error) {
                 setError(error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -48,7 +53,7 @@ function ScenarioForm({ scenario, setScenario, setResults }: ScenarioFormProps) 
                 clearTimeout(timeoutRef.current);
             }
         };
-    }, [scenario, run, setResults]);
+    }, [scenario, run, setResults, setLoading]);
 
     const updateScenario = (field: keyof Scenario, value: number | null) => {
         setScenario(prev => ({ ...prev, [field]: value }));

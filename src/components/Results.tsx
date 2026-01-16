@@ -41,14 +41,15 @@ function ChartHeader() {
 
 type ResultsProps = {
     results: SimulationResult | null;
+    loading: boolean;
 };
 
-export default function Results({ results }: ResultsProps) {
+export default function Results({ results, loading }: ResultsProps) {
     if (!results) {
         return (
             <div className="w-full">
                 <ChartHeader />
-                <LoadingSpinner />
+                {loading ? <LoadingSpinner /> : <p>No results available</p>}
             </div>
         );
     }

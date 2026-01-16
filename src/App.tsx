@@ -19,6 +19,7 @@ const DEFAULT_SCENARIO: Scenario = {
 function App() {
   const [results, setResults] = useState<SimulationResult | null>(null);
   const [scenario, setScenario] = useState<Scenario>(DEFAULT_SCENARIO);
+  const [loading, setLoading] = useState(false);
 
   const handleReset = () => {
     setScenario(DEFAULT_SCENARIO);
@@ -49,19 +50,19 @@ function App() {
             {/* Form section */}
             <aside className="lg:col-span-4 xl:col-span-1">
               <div
-                className="lg:sticky lg:top-6 p-4 sm:p-6 bg-white rounded-xl shadow-md"
+                className="lg:sticky lg:top-6 p-4 sm:p-6 bg-white rounded-xl shadow-md h-full"
               >
-                <ScenarioForm scenario={scenario} setScenario={setScenario} setResults={setResults} />
+                <ScenarioForm scenario={scenario} setScenario={setScenario} setResults={setResults} setLoading={setLoading} />
               </div>
             </aside>
 
             {/* Results section */}
             <main className="lg:col-span-8 xl:col-span-1">
               <div
-                className="p-4 sm:p-6 bg-white rounded-xl shadow-md"
+                className="p-4 sm:p-6 bg-white rounded-xl shadow-md h-full"
               >
                 <ErrorBoundary onReset={handleReset} scenario={scenario} onError={handleError}>
-                  <Results results={results} />
+                  <Results results={results} loading={loading} />
                 </ErrorBoundary>
               </div>
             </main>
